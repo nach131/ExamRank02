@@ -1,20 +1,29 @@
 
-## Índice
+## indice
 
 | Level 0 | Level 1 | Level 2 | Level 3 |
-|---------------------------|---|---|---|
-| [ft_putstr](#ft_putstr)   | [inter](#inter) |
+|---------------------------|-------------------------|---|---|
+| [ft_putstr](#ft_putstr)   | [inter](#inter)               |
 | [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |
-| [rev_print](#rev_print)   | 
-| [first_word](#first_word) | 
-| [fizzbuzz](#fizzbuzz)     | 
-| [ft_strcpy](#ft_strcpy)   | 
-| [ft_swap](#ft_swap)       | 
-| [repeat_alpha](#repeat_alpha) | 
-| [rot_13](#rot_13)         | 
-| [rotone](#rotone)         | 
-| [search_and_replace](#search_and_replace) | 
-| [ulstr](#ulstr)           | 
+| [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |
+| [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |
+| [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |
+| [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |
+| [ft_swap](#ft_swap)       | [do_op](#do_op)               |
+| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |
+| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |
+| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |
+| [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |
+| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |
+|                         | [is_power_of_2](#is_power_of_2) |
+|                         | [last_word](#last_word)         |
+|                         | [max](#max)                     |
+|                         | [print_bits](#print_bits)       |
+|                         | [snake_to_camel](#snake_to_camel) |
+|                         | [strcmp](#strcmp)               |
+|                         | [swap_bits](#swap_bits)         |
+|                         | [union](#swap_bunionits)        |
+
 
 # Level 0
 
@@ -794,10 +803,10 @@ int	main(int n, char **str)
 <details>
 <summary>subject</summary>
 
-Assignment name  : reverse_bits
-Expected files   : reverse_bits.c
-Allowed functions:
---------------------------------------------------------------------------------
+	Assignment name  : reverse_bits
+	Expected files   : reverse_bits.c
+	Allowed functions:
+	--------------------------------------------------------------------------------
 
 	Write a function that takes a byte, reverses it, bit by bit (like the
 	example) and returns the result.
@@ -847,10 +856,943 @@ int	main(int n, char **str)
 	printf("rev: %u\n", reverse_bits(ori));
 }
 ```
+
+## wdmatch
+<details>
+<summary>subject</summary>
+
+	Assignment name  : wdmatch
+	Expected files   : wdmatch.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes two strings and checks whether it's possible to
+	write the first string with characters from the second string, while respecting
+	the order in which these characters appear in the second string.
+
+	If it's possible, the program displays the string, followed by a \n, otherwise
+	it simply displays a \n.
+
+	If the number of arguments is not 2, the program displays a \n.
+
+	Examples:
+
+	$>./wdmatch "faya" "fgvvfdxcacpolhyghbreda" | cat -e
+	faya$
+	$>./wdmatch "faya" "fgvvfdxcacpolhyghbred" | cat -e
+	$
+	$>./wdmatch "forty two" "qfqfsoudf arzgrsayns tsryegftdgs sjytwdekuooixq " | cat -e
+	forty two$
+	$>./wdmatch "error" rrerrrfiiljdfxjyuifrrvcoojh | cat -e
+	$
+	$>./wdmatch | cat -e
+	$
+
+</details>
+
+```c
+void	wdmatch(char *s1, char *s2)
+{
+	int i = 0;
+	while (s1[i])
+	{
+		while (*s2 != s1[i] && *s2 != '\0')
+			++s2;
+		if (*s2 == '\0')
+			return;
+		++i;
+		++s2;
+	}
+	write(1, s1, i);
+}
+
+int		main(int n, char **str)
+{
+	if (n == 3)
+		wdmatch(str[1], str[2]);
+
+	write(1, "\n", 1);
+	return (0);
+}
+```
+
+## alpha_mirror
+
+<details>
+<summary>subject</summary>
+
+	intAssignment name  : alpha_mirror
+	Expected files   : alpha_mirror.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program called alpha_mirror that takes a string and displays this string
+	after replacing each alphabetical character by the opposite alphabetical
+	character, followed by a newline.
+
+	'a' becomes 'z', 'Z' becomes 'A'
+	'd' becomes 'w', 'M' becomes 'N'
+
+	and so on.
+
+	Case is not changed.
+
+	If the number of arguments is not 1, display only a newline.
+
+	Examples:
+
+	$>./alpha_mirror "abc"
+	zyx
+	$>./alpha_mirror "My horse is Amazing." | cat -e
+	Nb slihv rh Znzarmt.$
+	$>./alpha_mirror | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		while(str[1][i] != '\0')
+		{
+			if(str[1][i] >= 'a' && str[1][i] <= 'z')
+				str[1][i] = 'm' - (str[1][i] - 'n');
+			if(str[1][i] >= 'A' && str[1][i] <= 'Z')
+				str[1][i] = 'M' - (str[1][i] - 'N');
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return(0);
+}
+```
+
+## atoi
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_atoi
+	Expected files   : ft_atoi.c
+	Allowed functions: None
+	--------------------------------------------------------------------------------
+
+	Write a function that converts the string argument str to an integer (type int)
+	and returns it.
+
+	It works much like the standard atoi(const char *str) function, see the man.
+
+	Your function must be declared as follows:
+
+	int	ft_atoi(const char *str);
+
+</details>
+
+```c
+int ft_atoi(const char *str)
+{
+	int i = 0;
+	int neg = 1;
+	int num = 0;
+
+	if (str[i] == '-')
+		neg = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
+	{
+		num *= 10;
+		num += str[i] - '0';
+		i++;
+	}
+	return (neg * num);
+}
+```
+```c
+#include <stdio.h>
+#include <limits.h>
+
+int main(void)
+{
+	printf("ori: %i\n", atoi("4294967295"));
+	printf("ori: %i\n", atoi("-2147483647"));
+	printf("ori: %i\n", atoi("OH ! 13232!"));
+	printf("ori: %i\n", atoi("13232"));
+	printf("ori: %i\n", atoi("+13232"));
+	printf("ori: %i\n", atoi("-13232"));
+	printf("ori: %i\n", atoi("-42abc"));
+	printf("\t%d\n", INT_MAX);
+	printf("\t%d\n", INT_MIN);
+
+	printf("mio: %i\n", ft_atoi("4294967295"));
+	printf("mio: %i\n", ft_atoi("-2147483647"));
+	printf("mio: %i\n", ft_atoi("OH ! 13232!"));
+	printf("mio: %i\n", ft_atoi("13232"));
+	printf("mio: %i\n", ft_atoi("+13232"));
+	printf("mio: %i\n", ft_atoi("-13232"));
+	printf("mio: %i\n", ft_atoi("-42abc"));
+}
+```
+	ori: -1
+	ori: -2147483647
+	ori: 0
+	ori: 13232
+	ori: 13232
+	ori: -13232
+	ori: -42
+		2147483647
+		-2147483648
+	mio: -1
+	mio: -2147483647
+	mio: 0
+	mio: 13232
+	mio: 13232
+	mio: -13232
+	mio: -42
+
+## camel_to_snake
+<details>
+<summary>subject</summary>
+
+	Assignment name  : camel_to_snake
+	Expected files   : camel_to_snake.c
+	Allowed functions: malloc, free, realloc, write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a single string in lowerCamelCase format
+	and converts it into a string in snake_case format.
+
+	A lowerCamelCase string is a string where each word begins with a capital letter
+	except for the first one.
+
+	A snake_case string is a string where each word is in lower case, separated by
+	an underscore "_".
+
+	Examples:
+	$>./camel_to_snake "hereIsACamelCaseWord"
+	here_is_a_camel_case_word
+	$>./camel_to_snake "helloWorld" | cat -e
+	hello_world$
+	$>./camel_to_snake | cat -e
+	$
+
+</details>
+
+```c
+ #include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		while(str[1][i] != '\0')
+		{
+			if(str[1][i] >= 'A' && str[1][i] <= 'Z')
+			{
+				write(1, "_", 1);
+				str[1][i] += 32;
+			}
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	return(0);
+}
+```
+
+## do_op
+<details>
+<summary>subject</summary>
+
+	Assignment name  : do_op
+	Expected files   : *.c, *.h
+	Allowed functions: atoi, printf, write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes three strings:
+	- The first and the third one are representations of base-10 signed integers
+		that fit in an int.
+	- The second one is an arithmetic operator chosen from: + - * / %
+
+	The program must display the result of the requested arithmetic operation,
+	followed by a newline. If the number of parameters is not 3, the program
+	just displays a newline.
+
+	You can assume the string have no mistakes or extraneous characters. Negative
+	numbers, in input or output, will have one and only one leading '-'. The
+	result of the operation fits in an int.
+
+	Examples:
+
+	$> ./do_op "123" "*" 456 | cat -e
+	56088$
+	$> ./do_op "9828" "/" 234 | cat -e
+	42$
+	$> ./do_op "1" "+" "-43" | cat -e
+	-42$
+	$> ./do_op | cat -e
+	$
+
+</details>
+
+```c
+ #include <stdlib.h>
+ #include <stdio.h>
+
+int	main(int n, char **str)
+{
+	if(n == 4)
+	{
+		int uno = atoi(str[1]);
+		int dos = atoi(str[3]);
+
+		if(str[2][0] == '+')
+			printf("%i", uno + dos);
+		if(str[2][0] == '-')
+			printf("%i", uno - dos);
+		if(str[2][0] == '*')
+			printf("%i", uno * dos);
+		if(str[2][0] == '/')
+			printf("%i", uno / dos);
+		if(str[2][0] == '%')
+			printf("%i", uno % dos);
+	}
+	printf("\n");
+}
+```
+
+## ft_strcspn
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_strcspn
+	Expected files   : ft_strcspn.c
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Reproduce the behavior of the function strcspn (man strcspn).
+
+	Your function must be declared as follows:
+
+	size_t  ft_strcspn(const char   *s, const char  *reject);
+
+</details>
+
+
+```c
+size_t	ft_strcspn(const char *s, const char *reject)
+{
+	int i = 0;
+	int j = 0;
+
+	while(reject[i])
+	{
+		while(s[j])
+		{
+			if(s[j] == reject[i])
+				return j;
+			j++;
+		}
+		i++;
+	}
+	return(j);
+}
+```
+```c
+#include <stdio.h>
+#include <string.h>
+
+int	main(void)
+{
+	char aa[] = "test";
+	char bb[] = "f";
+
+	printf("mio: %lu\n", ft_strcspn(aa, bb));
+	printf("ori: %lu\n", strcspn(aa, bb));
+}
+```
+	mio: 4
+	ori: 4
+
+## ft_strdup
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_strdup
+	Expected files   : ft_strdup.c
+	Allowed functions: malloc
+	--------------------------------------------------------------------------------
+
+	Reproduce the behavior of the function strdup (man strdup).
+
+	Your function must be declared as follows:
+
+	char    *ft_strdup(char *src);
+
+</details>
+
+
+```c
+#include <stdlib.h>
+
+char	*ft_strdup(char *src)
+{
+	int i = 0;
+	char *res;
+
+	while(src[i])
+		i++;
+	res = malloc(i + 1);
+	if(!res)
+		return(NULL);
+	i = 0;
+	while(src[i])
+	{
+		res[i] = src[i];
+		i++;
+	}
+	res[i] = '\0';
+
+	return(res);
+}
+```
+```c
+#include <stdio.h>
+
+int	main(void)
+{
+	char *cp;
+
+	cp = ft_strdup("copiado");
+
+	printf("%s", cp);
+
+}
+```
+## ft_strpbrk
+<details>
+<summary>subject</summary>
+
+	Assignment name	: ft_strpbrk
+	Expected files	: ft_strpbrk.c
+	Allowed functions: None
+	---------------------------------------------------------------
+
+	Reproduce exactly the behavior of the function strpbrk
+	(man strpbrk).
+
+	The function should be prototyped as follows:
+
+	char	*ft_strpbrk(const char *s1, const char *s2);
+
+</details>
+
+```c
+char	*ft_strpbrk(const char *s1, const char *s2)
+{
+	int	i;
+
+	while(s1)
+	{
+		i = 0;
+		while(s2[i])
+		{
+			if(*s1 == s2[i])
+				return((char*)s1);
+			i++;
+		}
+		s1++;
+	}
+	return(0);
+}
+```
+```c
+#include <string.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	const char s[] = "AADff";
+	const char c[] = "dfASiCd";
+
+	printf("ori: %s\n", strpbrk(s, c));
+	printf("mio: %s\n", ft_strpbrk(s, c));
+}
+```
+	ori: AADff
+	mio: AADff
+
+
+## ft_strrev
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_strrev
+	Expected files   : ft_strrev.c
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write a function that reverses (in-place) a string.
+
+	It must return its parameter.
+
+	Your function must be declared as follows:
+
+	char    *ft_strrev(char *str);
+
+</details>
+
+```c
+char *ft_strrev(char *str)
+{
+	int len = 0;
+	int i = 0;
+	char tmp = 0;
+
+	while (str[len])
+		len++;
+	len--;
+	while (i < len)
+	{
+		tmp = str[len];
+		str[len] = str[i];
+		str[i] = tmp;
+		i++;
+		len--;
+	}
+	return (str);
+}
+```
+```c
+#include <stdio.h>
+int main(void)
+{
+	char s[] = "Hello World";
+	ft_strrev(s);
+	printf("%s\n", s);
+	return (0);
+}
+```
+## ft_strspn
+<details>
+<summary>subject</summary>
+
+	Assignment name	: ft_strspn
+	Expected files	: ft_strspn.c
+	Allowed functions: None
+	---------------------------------------------------------------
+
+	Reproduce exactly the behavior of the strspn function 
+	(man strspn).
+
+	The function should be prototyped as follows:
+
+	size_t	ft_strspn(const char *s, const char *accept);
+
+</details>
+
+```c
+size_t	ft_strspn(const char *s, const char *accept)
+{
+	const char *t_s = s;
+	const char *t_a;
+
+	while(*t_s)
+	{
+		t_a = accept;
+		while(1)
+		{
+			if(*t_s == *t_a)
+				break;
+			else if (*t_a++ == '\0')
+				return(t_s - s);
+		}
+		t_s++;
+	}
+	return(t_s - s);
+}
+```
+```c
+#include <string.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	char s[] = "ABABC";
+	char a[] = "ACB";
+
+	printf("ori: %lu \n", strspn(s, a));
+	printf("mio: %lu \n", ft_strspn(s, a));
+	return(0);
+}
+```
+
+## is_power_of_2
+<details>
+<summary>subject</summary>
+
+	Assignment name  : is_power_of_2
+	Expected files   : is_power_of_2.c
+	Allowed functions: None
+	--------------------------------------------------------------------------------
+
+	Write a function that determines if a given number is a power of 2.
+
+	This function returns 1 if the given number is a power of 2, otherwise it returns 0.
+
+	Your function must be declared as follows:
+
+	int	    is_power_of_2(unsigned int n);
+
+	--------------------------------------------------------------------------------
+
+	#include <stdio.h>
+	int main()
+	{
+		int	n;
+
+		printf("%d\n", is_power_of_2(64));
+	}
+
+</details>
+
+```c
+int	is_power_of_2(unsigned int n)
+{
+	if(n == 0)
+		return(0);
+	else if (n == 1 || n % 2 == 0)
+		return(1);
+	else
+	return(0);
+}
+```
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int n, char **str)
+{
+	unsigned int num = atoi(str[1]);
+
+	printf("es %d\n", is_power_of_2(num));
+	
+}
+```
+## last_word
+<details>
+<summary>subject</summary>
+
+	Assignment name  : last_word
+	Expected files   : i
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string and displays its last word followed by a \n.
+
+	A word is a section of string delimited by spaces/tabs or by the start/end of
+	the string.
+
+	If the number of parameters is not 1, or there are no words, display a newline.
+
+	Example:
+
+	$> ./last_word "FOR PONY" | cat -e
+	PONY$
+	$> ./last_word "this        ...       is sparta, then again, maybe    not" | cat -e
+	not$
+	$> ./last_word "   " | cat -e
+	$
+	$> ./last_word "a" "b" | cat -e
+	$
+	$> ./last_word "  lorem,ipsum  " | cat -e
+	lorem,ipsum$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		while (str[1][i])
+			i++;
+		i--;
+		while (str[1][i] == ' ' || str[1][i] == '\t')
+			i--;
+		while (str[1][i] >= '!' && str[1][i] <= '~')
+			i--;
+		i++;
+		while (str[1][i] >= '!' && str[1][i] <= '~')
+		{
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+}
+```
+## max
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : max
+	Expected files   : max.c
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write the following function:
+
+	int		max(int* tab, unsigned int len);
+
+	The first parameter is an array of int, the second is the number of elements in
+	the array.
+
+	The function returns the largest number found in the array.
+
+	If the array is empty, the function returns 0.
+
+</details>
+
+```c
+int	max(int* tab, unsigned int len)
+{
+	int i = 0;
+	if(!len)
+		return(0);
+	while(i < len)
+	{
+		if(tab[0] < tab[i])
+			tab[0] = tab[i];
+		i++;
+	}
+	return(tab[0]);
+}
+```
+```c
+#include <stdio.h>
+
+int main(void)
+{
+	int arr[8] = {7, -42, 0, 58, -64, -2, -68, -1};
+	int res = max(arr, 8);
+	
+	printf("max: %d\n", res);
+	return(0);
+}
+```
+## print_bits
+<details>
+<summary>subject</summary>
+
+	Assignment name  : print_bits
+	Expected files   : print_bits.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a function that takes a byte, and prints it in binary WITHOUT A NEWLINE
+	AT THE END.
+
+	Your function must be declared as follows:
+
+	void	print_bits(unsigned char octet);
+
+	Example, if you pass 2 to print_bits, it will print "00000010"
+
+</details>
+
+```c
+#include <unistd.h>
+
+void	print_bits(unsigned char octet)
+{
+	int i = 7;
+	char bits;
+
+	while(i >= 0)
+	{
+		bits = ((octet >> i) & 1) + '0';
+		write(1, &bits, 1);
+		i--;
+	}
+
+}
+```
+## snake_to_camel
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : snake_to_camel
+	Expected files   : snake_to_camel.c
+	Allowed functions: malloc, free, realloc, write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a single string in snake_case format
+	and converts it into a string in lowerCamelCase format.
+
+	A snake_case string is a string where each word is in lower case, separated by
+	an underscore "_".
+
+	A lowerCamelCase string is a string where each word begins with a capital letter
+	except for the first one.
+
+	Examples:
+	$>./camel_to_snake "here_is_a_snake_case_word"
+	hereIsASnakeCaseWord
+	$>./camel_to_snake "hello_world" | cat -e
+	helloWorld$
+	$>./camel_to_snake | cat -e
+	$
+
+</details>
+
+```c
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		while(str[1][i])
+		{
+			if(str[1][i] == '_')
+				i++;
+			if(str[1][i - 1] == '_')
+				str[1][i] -= 32;
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
+## strcmp
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_strcmp
+	Expected files   : ft_strcmp.c
+	Allowed functions:
+	--------------------------------------------------------------------------------
+
+	Reproduce the behavior of the function strcmp (man strcmp).
+
+	Your function must be declared as follows:
+
+	int    ft_strcmp(char *s1, char *s2);
+
+</details>
+
+```c
+int	ft_strcmp(char  *s1, char   *s2)
+{
+	int i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+```
+```c
+int	main(void)
+{
+
+	char a[] = "a";
+	char b[] = "ievbwvbew";
+
+	printf("mio: %d\n", ft_strcmp(a,b));
+	printf("original: %d\n", strcmp(a,b));
+
+}
+```
+## swap_bits
+<details>
+<summary>subject</summary>
+
+	Assignment name  : swap_bits
+	Expected files   : swap_bits.c
+	Allowed functions:
+	--------------------------------------------------------------------------------
+
+	Write a function that takes a byte, swaps its halves (like the example) and
+	returns the result.
+
+	Your function must be declared as follows:
+
+	unsigned char	swap_bits(unsigned char octet);
+
+	Example:
+
+		1 byte
+	_____________
+	0100 | 0001
+	    \ /
+	    / \
+	0001 | 0100
+
+	0011 1110
+
+</details>
+
+```c
+unsigned char	swap_bits(unsigned char octet)
+{
+	return((octet >> 4) | (octet << 4));
+}
+```
+## union
+<details>
+<summary>subject</summary>
+
+	Assignment name  : union
+	Expected files   : union.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes two strings and displays, without doubles, the
+	characters that appear in either one of the strings.
+
+	The display will be in the order characters appear in the command line, and
+	will be followed by a \n.
+
+	If the number of arguments is not 2, the program displays \n.
+
+	Example:
+
+	$>./union zpadinton "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
+	zpadintoqefwjy$
+	$>./union ddf6vewg64f gtwthgdwthdwfteewhrtag6h4ffdhsd | cat -e
+	df6vewg4thras$
+	$>./union "rien" "cette phrase ne cache rien" | cat -e
+	rienct phas$
+	$>./union | cat -e
+	$
+	$>
+	$>./union "rien" | cat -e
+	$
+	$>
+
+</details>
+
 -------------
 <details>
 <summary>subject</summary>
 
-
-
 </details>
+
+ [Indice](#indice) |
