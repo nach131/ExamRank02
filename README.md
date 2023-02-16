@@ -1756,6 +1756,7 @@ unsigned char	swap_bits(unsigned char octet)
 }
 ```
 ## union
+
 <details>
 <summary>subject</summary>
 
@@ -1789,6 +1790,35 @@ unsigned char	swap_bits(unsigned char octet)
 
 </details>
 
+```c
+#include <unistd.h>
+
+int main(int n, char **str)
+{
+	if (n == 3)
+	{
+		int i = 1;
+		int arr[255] = {0};
+
+		while (i <= 2)
+		{
+			int j = 0;
+			while (str[i][j])
+			{
+				if (!arr[(int)str[i][j]])
+				{
+					write(1, &str[i][j], 1);
+					arr[(int)str[i][j]] = 1;
+				}
+				j++;
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
 -------------
 <details>
 <summary>subject</summary>
