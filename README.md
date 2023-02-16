@@ -1,16 +1,22 @@
 
 ## Índice
-Level 0
-- [ft_putstr](#ft_putstr)
-- [ft_strlen](#ft_strlen)
-- [rev_print](#rev_print)
-- [first_word](#first_word)
-- [fizzbuzz](#fizzbuzz)
-- [ft_strcpy](#ft_strcpy)
-- [ft_swap](#ft_swap)
-- [repeat_alpha](#repeat_alpha)
-- [rot_13](#rot_13)
 
+| Level 0 | Level 1 | Level 2 | Level 3 |
+|---------------------------|---|---|---|
+| [ft_putstr](#ft_putstr)   | [inter](#inter) |
+| [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |
+| [rev_print](#rev_print)   | 
+| [first_word](#first_word) | 
+| [fizzbuzz](#fizzbuzz)     | 
+| [ft_strcpy](#ft_strcpy)   | 
+| [ft_swap](#ft_swap)       | 
+| [repeat_alpha](#repeat_alpha) | 
+| [rot_13](#rot_13)         | 
+| [rotone](#rotone)         | 
+| [search_and_replace](#search_and_replace) | 
+| [ulstr](#ulstr)           | 
+
+# Level 0
 
 ## ft_putstr
 <details>
@@ -552,10 +558,299 @@ int	main(int a, char **str)
 	}
 }
 ```
+## rotone
+<details>
+<summary>subject</summary>
 
+	Assignment name  : rotone
+	Expected files   : rotone.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string and displays it, replacing each of its
+	letters by the next one in alphabetical order.
+
+	'z' becomes 'a' and 'Z' becomes 'A'. Case remains unaffected.
+
+	The output will be followed by a \n.
+
+	If the number of arguments is not 1, the program displays \n.
+
+	Example:
+
+	$>./rotone "abc"
+	bcd
+	$>./rotone "Les stagiaires du staff ne sentent pas toujours tres bon." | cat -e
+	Mft tubhjbjsft ev tubgg of tfoufou qbt upvkpvst usft cpo.$
+	$>./rotone "AkjhZ zLKIJz , 23y " | cat -e
+	BlkiA aMLJKa , 23z $
+	$>./rotone | cat -e
+	$
+	$>
+	$>./rotone "" | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+
+	if(n  == 2)
+	{
+		int i = 0;
+		while(str[1][i])
+		{
+			if ((str[1][i] >= 'a' && str[1][i] <= 'y') || (str[1][i] >= 'A' && str[1][i] <= 'Y'))
+				str[1][i] += 1;
+			if((str[1][i] == 'z') || (str[1][i] == 'Z'))
+				str[1][i] -= 25;
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
+
+## search_and_replace
+
+<details>
+<summary>subject</summary>
+
+Assignment name  : search_and_replace
+Expected files   : search_and_replace.c
+Allowed functions: write, exit
+--------------------------------------------------------------------------------
+
+	Write a program called search_and_replace that takes 3 arguments, the first 
+	arguments is a string in which to replace a letter (2nd argument) by
+	another one (3rd argument).
+
+	If the number of arguments is not 3, just display a newline.
+
+	If the second argument is not contained in the first one (the string)
+	then the program simply rewrites the string followed by a newline.
+
+	Examples:
+	$>./search_and_replace "Papache est un sabre" "a" "o"
+	Popoche est un sobre
+	$>./search_and_replace "zaz" "art" "zul" | cat -e
+	$
+	$>./search_and_replace "zaz" "r" "u" | cat -e
+	zaz$
+	$>./search_and_replace "jacob" "a" "b" "c" "e" | cat -e
+	$
+	$>./search_and_replace "ZoZ eT Dovid oiME le METol." "o" "a" | cat -e
+	ZaZ eT David aiME le METal.$
+	$>./search_and_replace "wNcOre Un ExEmPle Pas Facilw a Ecrirw " "w" "e" | cat -e
+	eNcOre Un ExEmPle Pas Facile a Ecrire $
+
+</details>
+
+```c
+int	main(int n, char **str)
+{
+	if(n == 4)
+	{
+		if(str[2][1] != '\0' || str[3][1] != '\0')
+		{	
+			write(1, "\n", 1);
+			return (0);
+		}
+		int i = 0;
+		while(str[1][i])
+		{
+			if(str[1][i] == str[2][0])
+				str[1][i] = str[3][0];
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
+## ulstr
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ulstr
+	Expected files   : ulstr.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string and reverses the case of all its letters.
+	Other characters remain unchanged.
+
+	You must display the result followed by a '\n'.
+
+	If the number of arguments is not 1, the program displays '\n'.
+
+	Examples :
+
+	$>./ulstr "L'eSPrit nE peUt plUs pRogResSer s'Il staGne et sI peRsIsTent VAnIte et auto-justification." | cat -e
+	l'EspRIT Ne PEuT PLuS PrOGrESsER S'iL STAgNE ET Si PErSiStENT vaNiTE ET AUTO-JUSTIFICATION.$
+	$>./ulstr "S'enTOuRer dE sECreT eSt uN sIGnE De mAnQuE De coNNaiSSanCe.  " | cat -e
+	s'ENtoUrER De SecREt EsT Un SigNe dE MaNqUe dE COnnAIssANcE.  $
+	$>./ulstr "3:21 Ba  tOut  moUn ki Ka di KE m'en Ka fe fot" | cat -e
+	3:21 bA  ToUT  MOuN KI kA DI ke M'EN kA FE FOT$
+	$>./ulstr | cat -e
+	$
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		while(str[1][i])
+		{
+			if(str[1][i] >= 'A' && str[1][i] <= 'Z')
+				str[1][i] += 32;
+		 	else if(str[1][i] >= 'a' && str[1][i] <= 'z')
+				str[1][i] -= 32;
+			write(1, &str[1][i], 1);
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return(0);
+}
+```
+# Level 1
+
+## inter
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : inter
+	Expected files   : inter.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes two strings and displays, without doubles, the
+	characters that appear in both strings, in the order they appear in the first
+	one.
+
+	The display will be followed by a \n.
+
+	If the number of arguments is not 2, the program displays \n.
+
+	Examples:
+
+	$>./inter "padinton" "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
+	padinto$
+	$>./inter ddf6vewg64f gtwthgdwthdwfteewhrtag6h4ffdhsd | cat -e
+	df6ewg4$
+	$>./inter "rien" "cette phrase ne cache rien" | cat -e
+	rien$
+	$>./inter | cat -e
+	$
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 3)
+	{
+		int arr[255] = {0};
+		int i = 0;
+
+		while(str[2][i])
+		{
+			arr[(int)str[2][i]] = 1;
+			i++;
+		}
+		i = 0;
+		while(str[1][i])
+		{
+			if(arr[(int)str[1][i]])
+			{
+				write(1, &str[1][i], 1);
+				arr[(int)str[1][i]] = 0;
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return(0);
+}
+```
+
+## reverse_bits
+<details>
+<summary>subject</summary>
+
+Assignment name  : reverse_bits
+Expected files   : reverse_bits.c
+Allowed functions:
+--------------------------------------------------------------------------------
+
+	Write a function that takes a byte, reverses it, bit by bit (like the
+	example) and returns the result.
+
+	Your function must be declared as follows:
+
+	unsigned char	reverse_bits(unsigned char octet);
+
+	Example:
+
+	1 byte
+	_____________
+	0100  0001
+	    ||
+	    \/
+	1000  0010
+
+</details>
+
+```c
+
+unsigned char	reverse_bits(unsigned char octet)
+{
+	unsigned char out = 0;
+
+	out += ((octet & 128) >> 7);
+	out += ((octet & 64) >> 5);
+	out += ((octet & 32) >> 3);
+	out += ((octet & 16) >> 1);
+	out += ((octet & 8) << 1);
+	out += ((octet & 4) << 3);
+	out += ((octet & 2) << 5);
+	out += ((octet & 1) << 7);
+
+	return(out);
+}
+```
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(int n, char **str)
+{
+	unsigned char ori = atoi(str[1]);
+//	unsigned char ori = 32;
+	printf("ori: %u\n", ori);
+	printf("rev: %u\n", reverse_bits(ori));
+}
+```
 -------------
 <details>
 <summary>subject</summary>
+
 
 
 </details>
