@@ -109,6 +109,8 @@ int	main(void)
 ```
 	$len: 12
 
+[Indice](#indice)
+
 ## rev_print
 
 <details>
@@ -161,6 +163,9 @@ int main(int n, char **str)
 	return (0);
 }
 ```
+
+[Indice](#indice)
+
 ## first_word
 <details>
 <summary>subject</summary>
@@ -212,6 +217,8 @@ int	main(int n, char **str)
 	return(0);
 }
 ```
+[Indice](#indice)
+
 ## fizzbuzz
 <details>
 <summary>subject</summary>
@@ -283,6 +290,9 @@ int	main(void)
 	}
 }
 ```
+
+[Indice](#indice)
+
 ## ft_strcpy
 <details>
 <summary>subject</summary>
@@ -332,6 +342,8 @@ int main(void)
 	$dst: 42 Barcelona, str: copiar	
 	$dst: copiar, str: copiar
 
+[Indice](#indice)
+
 ## ft_swap
 <details>
 <summary>subject</summary>
@@ -375,6 +387,8 @@ int	main(void)
 ```
 	$a:42, b:20
 	$a:20, b:42
+
+[Indice](#indice)
 
 ## repeat_alpha
 <details>
@@ -442,6 +456,8 @@ int	main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 ## rot_13
 
 <details>
@@ -504,6 +520,9 @@ int	main(int a, char **str)
 	}
 }
 ```
+
+[Indice](#indice)
+
 ## rotone
 <details>
 <summary>subject</summary>
@@ -563,6 +582,8 @@ int	main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 ## search_and_replace
 
 <details>
@@ -621,6 +642,9 @@ int	main(int n, char **str)
 	return (0);
 }
 ```
+
+[Indice](#indice)
+
 ## ulstr
 <details>
 <summary>subject</summary>
@@ -673,6 +697,8 @@ int	main(int n, char **str)
 }
 ```
 # Level 1
+
+[Indice](#indice)
 
 ## inter
 
@@ -736,6 +762,8 @@ int	main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 ## reverse_bits
 <details>
 <summary>subject</summary>
@@ -793,6 +821,8 @@ int	main(int n, char **str)
 	printf("rev: %u\n", reverse_bits(ori));
 }
 ```
+
+[Indice](#indice)
 
 ## wdmatch
 <details>
@@ -853,6 +883,8 @@ int		main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 ## alpha_mirror
 
 <details>
@@ -910,6 +942,8 @@ int	main(int n, char **str)
 	return(0);
 }
 ```
+
+[Indice](#indice)
 
 ## atoi
 
@@ -994,6 +1028,8 @@ int main(void)
 	mio: -13232
 	mio: -42
 
+[Indice](#indice)
+
 ## camel_to_snake
 <details>
 <summary>subject</summary>
@@ -1044,6 +1080,8 @@ int	main(int n, char **str)
 	return(0);
 }
 ```
+
+[Indice](#indice)
 
 ## do_op
 <details>
@@ -1106,6 +1144,8 @@ int	main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 ## ft_strcspn
 
 <details>
@@ -1159,6 +1199,8 @@ int	main(void)
 ```
 	mio: 4
 	ori: 4
+
+[Indice](#indice)
 
 ## ft_strdup
 
@@ -1216,6 +1258,9 @@ int	main(void)
 
 }
 ```
+
+[Indice](#indice)
+
 ## ft_strpbrk
 <details>
 <summary>subject</summary>
@@ -1269,6 +1314,7 @@ int	main(void)
 	ori: AADff
 	mio: AADff
 
+[Indice](#indice)
 
 ## ft_strrev
 <details>
@@ -1320,6 +1366,9 @@ int main(void)
 	return (0);
 }
 ```
+
+[Indice](#indice)
+
 ## ft_strspn
 <details>
 <summary>subject</summary>
@@ -1374,6 +1423,8 @@ int	main(void)
 }
 ```
 
+[Indice](#indice)
+
 ## is_power_of_2
 <details>
 <summary>subject</summary>
@@ -1426,6 +1477,9 @@ int main(int n, char **str)
 	
 }
 ```
+
+[Indice](#indice)
+
 ## last_word
 <details>
 <summary>subject</summary>
@@ -1483,6 +1537,9 @@ int	main(int n, char **str)
 	write(1, "\n", 1);
 }
 ```
+
+[Indice](#indice)
+
 ## max
 
 <details>
@@ -1533,6 +1590,9 @@ int main(void)
 	return(0);
 }
 ```
+
+[Indice](#indice)
+
 ## print_bits
 <details>
 <summary>subject</summary>
@@ -1570,6 +1630,9 @@ void	print_bits(unsigned char octet)
 
 }
 ```
+
+[Indice](#indice)
+
 ## snake_to_camel
 
 <details>
@@ -1619,6 +1682,9 @@ int	main(int n, char **str)
 	return (0);
 }
 ```
+
+[Indice](#indice)
+
 ## strcmp
 <details>
 <summary>subject</summary>
@@ -1657,6 +1723,9 @@ int	main(void)
 
 }
 ```
+
+[Indice](#indice)
+
 ## swap_bits
 <details>
 <summary>subject</summary>
@@ -1692,6 +1761,9 @@ unsigned char	swap_bits(unsigned char octet)
 	return((octet >> 4) | (octet << 4));
 }
 ```
+
+[Indice](#indice)
+
 ## union
 
 <details>
@@ -1757,6 +1829,8 @@ int main(int n, char **str)
 }
 ```
 
+[Indice](#indice)
+
 # Level 2
 
 -------------
@@ -1765,4 +1839,4 @@ int main(int n, char **str)
 
 </details>
 
- [Indice](#indice) |
+[Indice](#indice)
