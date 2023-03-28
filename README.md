@@ -399,7 +399,8 @@ int	main(void)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program called repeat_alpha that takes a string and display it repeating each alphabetical character as many times as its alphabetical index, followed by a newline.
+	Write a program called repeat_alpha that takes a string and display it repeating each alphabetical character
+	as many times as its alphabetical index, followed by a newline.
 
 	'a' becomes 'a', 'b' becomes 'bb', 'e' becomes 'eeeee', etc...
 
