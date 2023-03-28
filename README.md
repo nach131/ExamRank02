@@ -469,7 +469,8 @@ int	main(int n, char **str)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program that takes a string and displays it, replacing each of its letters by the letter 13 spaces ahead in alphabetical order.
+	Write a program that takes a string and displays it, replacing each of its letters by the letter 13
+	spaces ahead in alphabetical order.
 
 	'z' becomes 'm' and 'Z' becomes 'M'. Case remains unaffected.
 
