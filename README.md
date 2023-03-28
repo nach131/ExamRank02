@@ -1,8 +1,8 @@
 
 ## indice
 
-| Level 0 | Level 1 | Level 2 | Level 3 |
-|---------------------------|-------------------------|---|---|
+| Level 0                   | Level 1                       | Level 2         | Level 3        |
+|---------------------------|-------------------------------|-----------------|----------------|
 | [ft_putstr](#ft_putstr)   | [inter](#inter)               |
 | [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |
 | [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |
@@ -15,14 +15,14 @@
 | [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |
 | [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |
 | [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |
-|                         | [is_power_of_2](#is_power_of_2) |
-|                         | [last_word](#last_word)         |
-|                         | [max](#max)                     |
-|                         | [print_bits](#print_bits)       |
-|                         | [snake_to_camel](#snake_to_camel) |
-|                         | [strcmp](#strcmp)               |
-|                         | [swap_bits](#swap_bits)         |
-|                         | [union](#swap_bunionits)        |
+|                           | [is_power_of_2](#is_power_of_2) |
+|                           | [last_word](#last_word)         |
+|                           | [max](#max)                     |
+|                           | [print_bits](#print_bits)       |
+|                           | [snake_to_camel](#snake_to_camel) |
+|                           | [strcmp](#strcmp)               |
+|                           | [swap_bits](#swap_bits)         |
+|                           | [union](#union)                 |
 
 
 # Level 0
@@ -119,8 +119,7 @@ int	main(void)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program that takes a string, and displays the string in reverse
-	followed by a newline.
+	Write a program that takes a string, and displays the string in reverse followed by a newline.
 
 	If the number of parameters is not 1, the program displays a newline.
 
@@ -171,14 +170,11 @@ int main(int n, char **str)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program that takes a string and displays its first word, followed by a
-	newline.
+	Write a program that takes a string and displays its first word, followed by a newline.
 
-	A word is a section of string delimited by spaces/tabs or by the start/end of
-	the string.
+	A word is a section of string delimited by spaces/tabs or by the start/end of the string.
 
-	If the number of parameters is not 1, or if there are no words, simply display
-	a newline.
+	If the number of parameters is not 1, or if there are no words, simply display a newline.
 
 	Examples:
 
@@ -225,8 +221,7 @@ int	main(int n, char **str)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program that prints the numbers from 1 to 100, each separated by a
-	newline.
+	Write a program that prints the numbers from 1 to 100, each separated by a newline.
 
 	If the number is a multiple of 3, it prints 'fizz' instead.
 
@@ -292,60 +287,6 @@ int	main(void)
 <details>
 <summary>subject</summary>
 
-	Assignment name  : first_word
-	Expected files   : first_word.c
-	Allowed functions: write
-	--------------------------------------------------------------------------------
-
-	Write a program that takes a string and displays its first word, followed by a
-	newline.
-
-	A word is a section of string delimited by spaces/tabs or by the start/end of
-	the string.
-
-	If the number of parameters is not 1, or if there are no words, simply display
-	a newline.
-
-	Examples:
-
-	$> ./first_word "FOR PONY" | cat -e
-	FOR$
-	$> ./first_word "this        ...       is sparta, then again, maybe    not" | cat -e
-	this$
-	$> ./first_word "   " | cat -e
-	$
-	$> ./first_word "a" "b" | cat -e
-	$
-	$> ./first_word "  lorem,ipsum  " | cat -e
-	lorem,ipsum$
-	$>
-</details>
-
-```c
-#include <unistd.h>
-
-int	main(int n, char **str)
-{
-	if(n == 2)
-	{
-		while(*str[1] == ' ')
-			str[1]++;
-		int i = 0;
-		while(str[1][i] != ' ' && str[1][i] != '\0')
-		{
-			write(1, &str[1][i], 1);
-			i++;
-		}
-		
-	}
-	write(1, "\n", 1);
-	return(0);
-}
-```
-## fizzbuzz
-<details>
-<summary>subject</summary>
-
 	Assignment name  : ft_strcpy
 	Expected files   : ft_strcpy.c
 	Allowed functions: 
@@ -400,8 +341,7 @@ int main(void)
 	Allowed functions: 
 	--------------------------------------------------------------------------------
 
-	Write a function that swaps the contents of two integers the adresses of which
-	are passed as parameters.
+	Write a function that swaps the contents of two integers the adresses of which are passed as parameters.
 
 	Your function must be declared as follows:
 
@@ -445,9 +385,7 @@ int	main(void)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program called repeat_alpha that takes a string and display it
-	repeating each alphabetical character as many times as its alphabetical index,
-	followed by a newline.
+	Write a program called repeat_alpha that takes a string and display it repeating each alphabetical character as many times as its alphabetical index, followed by a newline.
 
 	'a' becomes 'a', 'b' becomes 'bb', 'e' becomes 'eeeee', etc...
 
@@ -514,8 +452,7 @@ int	main(int n, char **str)
 	Allowed functions: write
 	--------------------------------------------------------------------------------
 
-	Write a program that takes a string and displays it, replacing each of its
-	letters by the letter 13 spaces ahead in alphabetical order.
+	Write a program that takes a string and displays it, replacing each of its letters by the letter 13 spaces ahead in alphabetical order.
 
 	'z' becomes 'm' and 'Z' becomes 'M'. Case remains unaffected.
 
@@ -1819,6 +1756,9 @@ int main(int n, char **str)
 	return (0);
 }
 ```
+
+# Level 2
+
 -------------
 <details>
 <summary>subject</summary>
