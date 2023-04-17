@@ -1714,14 +1714,16 @@ int	ft_strcmp(char  *s1, char   *s2)
 int	main(void)
 {
 
-	char a[] = "a";
-	char b[] = "ievbwvbew";
+	char s[] = "ABABC";
+	char a[] = "ACB";
 
 	printf("mio: %d\n", ft_strcmp(a,b));
 	printf("original: %d\n", strcmp(a,b));
 
 }
 ```
+	ori: 5
+	mio: 5
 
 [Indice](#indice)
 
