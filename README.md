@@ -1,5 +1,5 @@
 
-## indice
+## index
 
 | Level 0                   | Level 1                       | Level 2                        | Level 3        |
 |---------------------------|-------------------------------|--------------------------------|----------------|
@@ -109,7 +109,7 @@ int	main(void)
 ```
 	$len: 12
 
-[Indice](#indice)
+[index](#index)
 
 ## rev_print
 
@@ -164,7 +164,7 @@ int main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## first_word
 <details>
@@ -217,7 +217,7 @@ int	main(int n, char **str)
 	return(0);
 }
 ```
-[Indice](#indice)
+[index](#index)
 
 ## fizzbuzz
 <details>
@@ -291,7 +291,7 @@ int	main(void)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strcpy
 <details>
@@ -342,7 +342,7 @@ int main(void)
 	$dst: 42 Barcelona, str: copiar	
 	$dst: copiar, str: copiar
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_swap
 <details>
@@ -388,7 +388,7 @@ int	main(void)
 	$a:42, b:20
 	$a:20, b:42
 
-[Indice](#indice)
+[index](#index)
 
 ## repeat_alpha
 <details>
@@ -457,7 +457,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## rot_13
 
@@ -523,7 +523,7 @@ int	main(int a, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## rotone
 <details>
@@ -584,7 +584,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## search_and_replace
 
@@ -645,7 +645,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## ulstr
 <details>
@@ -700,7 +700,7 @@ int	main(int n, char **str)
 ```
 # Level 1
 
-[Indice](#indice)
+[index](#index)
 
 ## inter
 
@@ -764,7 +764,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## reverse_bits
 <details>
@@ -824,7 +824,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## wdmatch
 <details>
@@ -882,7 +882,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## alpha_mirror
 
@@ -942,7 +942,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## atoi
 
@@ -1027,7 +1027,7 @@ int main(void)
 	mio: -13232
 	mio: -42
 
-[Indice](#indice)
+[index](#index)
 
 ## camel_to_snake
 <details>
@@ -1080,7 +1080,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## do_op
 <details>
@@ -1143,7 +1143,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strcspn
 
@@ -1199,7 +1199,7 @@ int	main(void)
 	mio: 4
 	ori: 4
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strdup
 
@@ -1258,7 +1258,7 @@ int	main(void)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strpbrk
 <details>
@@ -1313,7 +1313,7 @@ int	main(void)
 	ori: AADff
 	mio: AADff
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strrev
 <details>
@@ -1366,7 +1366,7 @@ int main(void)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## ft_strspn
 <details>
@@ -1422,7 +1422,7 @@ int	main(void)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## is_power_of_2
 <details>
@@ -1477,7 +1477,7 @@ int main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## last_word
 <details>
@@ -1537,7 +1537,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## max
 
@@ -1590,7 +1590,7 @@ int main(void)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## print_bits
 <details>
@@ -1630,7 +1630,7 @@ void	print_bits(unsigned char octet)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## snake_to_camel
 
@@ -1682,7 +1682,7 @@ int	main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## strcmp
 <details>
@@ -1725,7 +1725,7 @@ int	main(void)
 	ori: 5
 	mio: 5
 
-[Indice](#indice)
+[index](#index)
 
 ## swap_bits
 <details>
@@ -1763,7 +1763,7 @@ unsigned char	swap_bits(unsigned char octet)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## union
 
@@ -1830,7 +1830,7 @@ int main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 # Level 2
 
@@ -1932,7 +1932,7 @@ int main(int n, char **str)
 }
 ```
 
-[Indice](#indice)
+[index](#index)
 
 ## epur_str
 
@@ -1994,7 +1994,7 @@ int main(int n, char **str)
 	write(1, "\n", 1);
 }
 ```
-[Indice](#indice)
+[index](#index)
 
 ## expand_str
 
@@ -2056,7 +2056,7 @@ int	main(int n, char **str)
 }
 
 ```
-[Indice](#indice)
+[index](#index)
 
 ## ft_atoi_base
 
@@ -2087,8 +2087,6 @@ int	main(int n, char **str)
 </details>
 
 ```c
-// Passed Moulinette 2019.09.01
-
 char	to_lower(char c)
 {
 	if (c >= 'A' && c <= 'Z')
@@ -2143,11 +2141,11 @@ printf("%d\n", ft_atoi_base("15690b80B", 13));
  ```
 
 
-[Indice](#indice)
+[index](#index)
 -------------
 <details>
 <summary>subject</summary>
 
 </details>
 
-[Indice](#indice)
+[index](#index)
