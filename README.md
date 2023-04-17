@@ -4,8 +4,8 @@
 | Level 0                   | Level 1                       | Level 2                        | Level 3        |
 |---------------------------|-------------------------------|--------------------------------|----------------|
 | [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) | 
-| [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |
-| [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |
+| [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |[epur_str](#epur_str)           |
+| [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |[expand_str](#expand_str)       |
 | [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |
 | [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |
 | [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |
@@ -1930,8 +1930,218 @@ int main(int n, char **str)
 
 	return(0);
 }
+```
+
+[Indice](#indice)
+
+## epur_str
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : epur_str
+	Expected files   : epur_str.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string, and displays this string with exactly one
+	space between words, with no spaces or tabs either at the beginning or the end,
+	followed by a \n.
+
+	A "word" is defined as a part of a string delimited either by spaces/tabs, or
+	by the start/end of the string.
+
+	If the number of arguments is not 1, or if there are no words to display, the
+	program displays \n.
+
+	Example:
+
+	$> ./epur_str "See? It's easy to print the same thing" | cat -e
+	See? It's easy to print the same thing$
+	$> ./epur_str " this        time it      will     be    more complex  . " | cat -e
+	this time it will be more complex .$
+	$> ./epur_str "No S*** Sherlock..." "nAw S*** ShErLaWQ..." | cat -e
+	$
+	$> ./epur_str "" | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int main(int n, char **str)
+{
+	if (n == 2)
+	{
+		int i = 0;
+		while (*str[1] == ' ' || *str[1] == '\t')
+			++str[1];
+		while (str[1][i] != '\0')
+		{
+			if (str[1][i] == ' ' || str[1][i] == '\t')
+				i++;
+			else
+			{
+				if (i && (str[1][i - 1] == ' ' || str[1][i - 1] == '\t'))
+					write(1, " ", 1);
+				write(1, &str[1][i], 1);
+				i++;
+			}
+		}
+	}
+	write(1, "\n", 1);
+}
+```
+[Indice](#indice)
+
+## expand_str
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : expand_str
+	Expected files   : expand_str.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string and displays it with exactly three spaces
+	between each word, with no spaces or tabs either at the beginning or the end,
+	followed by a newline.
+
+	A word is a section of string delimited either by spaces/tabs, or by the
+	start/end of the string.
+
+	If the number of parameters is not 1, or if there are no words, simply display
+	a newline.
+
+	Examples:
+
+	$> ./expand_str "See? It's easy to print the same thing" | cat -e
+	See?   It's   easy   to   print   the   same   thing$
+	$> ./expand_str " this        time it      will     be    more complex  " | cat -e
+	this   time   it   will   be   more   complex$
+	$> ./expand_str "No S*** Sherlock..." "nAw S*** ShErLaWQ..." | cat -e
+	$
+	$> ./expand_str "" | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		while(*str[1] == ' ')
+			str[1]++;
+		int i = 0;
+		while(str[1][i])
+		{
+			if(str[1][i] != ' ')
+			{
+				if(str[1][i - 1] == ' ' && i)
+					write(1, "   ", 3);
+				write(1, &str[1][i], 1);
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return(0);
+}
 
 ```
+[Indice](#indice)
+
+## ft_atoi_base
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_atoi_base
+	Expected files   : ft_atoi_base.c
+	Allowed functions: None
+	--------------------------------------------------------------------------------
+
+	Write a function that converts the string argument str (base N <= 16)
+	to an integer (base 10) and returns it.
+
+	The characters recognized in the input are: 0123456789abcdef
+	Those are, of course, to be trimmed according to the requested base. For
+	example, base 4 recognizes "0123" and base 16 recognizes "0123456789abcdef".
+
+	Uppercase letters must also be recognized: "12fdb3" is the same as "12FDB3".
+
+	Minus signs ('-') are interpreted only if they are the first character of the
+	string.
+
+	Your function must be declared as follows:
+
+	int	ft_atoi_base(const char *str, int str_base);
+
+</details>
+
+```c
+// Passed Moulinette 2019.09.01
+
+char	to_lower(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
+}
+
+int		get_digit(char c, int digits_in_base)
+{
+	int max_digit;
+	if (digits_in_base <= 10)
+		max_digit = digits_in_base + '0';
+	else
+		max_digit = digits_in_base - 10 + 'a';
+
+	if (c >= '0' && c <= '9' && c <= max_digit)
+		return (c - '0');
+	else if (c >= 'a' && c <= 'f' && c <= max_digit)
+		return (10 + c - 'a');
+	else
+		return (-1);
+}
+
+int		ft_atoi_base(const char *str, int str_base)
+{
+	int result = 0;
+	int sign = 1;
+	int digit;
+
+	if (*str == '-')
+	{
+		sign = -1;
+		++str;
+	}
+
+	while ((digit = get_digit(to_lower(*str), str_base)) >= 0)
+	{
+		result = result * str_base;
+		result = result + (digit * sign);
+		++str;
+	}
+	return (result);
+}
+```
+```c
+#include <stdio.h>
+
+int	main(void)
+{
+printf("%d\n", ft_atoi_base("15690b80B", 13));
+}
+ ```
+
 
 [Indice](#indice)
 -------------
