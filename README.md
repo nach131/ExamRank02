@@ -1,22 +1,22 @@
 
 ## index
 
-| Level 0                   | Level 1                       | Level 2                        | Level 3        |
-|---------------------------|-------------------------------|--------------------------------|----------------|
-| [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) | 
+| Level 0                   | Level 1                       | Level 2                        | Level 3                 |
+|---------------------------|-------------------------------|--------------------------------|-------------------------|
+| [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) |[flood_fill](#flood_fill)|
 | [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |[epur_str](#epur_str)           |
 | [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |[expand_str](#expand_str)       |
 | [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |[ft_atoi_base](#ft_atoi_base)   |
-| [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |
-| [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |
-| [ft_swap](#ft_swap)       | [do_op](#do_op)               |
-| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |
-| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |
-| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |
-| [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |
-| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |
-|                           | [is_power_of_2](#is_power_of_2) |
-|                           | [last_word](#last_word)         |
+| [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |[ft_list_size](#ft_list_size)   |
+| [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |[ft_range](#ft_range)       |
+| [ft_swap](#ft_swap)       | [do_op](#do_op)               |[ft_rrange](#ft_rrange)         |
+| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |[hidenp](#hidenp)               |
+| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |[lcm](#lcm)                     |
+| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |[paramsum](#paramsum)           |
+| [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |[pgcd](#pgcd)         |
+| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |[rstr_capitalizer](#rstr_capitalizer)|
+|                           | [is_power_of_2](#is_power_of_2) |[str_capitalizer](#str_capitalizer)|
+|                           | [last_word](#last_word)         |[tab_mult](#tab_mult)         |
 |                           | [max](#max)                     |
 |                           | [print_bits](#print_bits)       |
 |                           | [snake_to_camel](#snake_to_camel) |
@@ -2140,12 +2140,762 @@ printf("%d\n", ft_atoi_base("15690b80B", 13));
 }
  ```
 
-
 [index](#index)
--------------
+
+## ft_list_size
+
 <details>
 <summary>subject</summary>
 
+	Assignment name  : ft_list_size
+	Expected files   : ft_list_size.c, ft_list.h
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write a function that returns the number of elements in the linked list that's
+	passed to it.
+
+	It must be declared as follows:
+
+	int	ft_list_size(t_list *begin_list);
+
+	You must use the following structure, and turn it in as a file called
+	ft_list.h:
+
+	typedef struct    s_list
+	{
+			struct s_list *next;
+			void          *data;
+	}                 t_list;
+
+```ft_list.h```
+```c
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *data;
+}                 t_list;
+
+```
+
 </details>
+
+```c
+
+int ft_list_size(t_list *begin_list)
+{
+	int i = 0;
+	while (begin_list != NULL)
+	{
+		i++;
+		begin_list = begin_list->next;
+	}
+	return (i);
+}
+
+```
+
+```c
+int main(void)
+{
+
+	t_list *new;
+
+	new = (t_list *)calloc(sizeof(t_list), 1);
+	if (!new)
+		return (-1);
+
+	new->data = "42 Barcelona";
+	new->next = NULL;
+
+	t_list *newDos;
+	newDos = (t_list *)calloc(sizeof(t_list), 1);
+	newDos->data = "Madrid";
+	newDos->next = NULL;
+	new->next = newDos;
+
+	 printf("%s\n", new->data);
+	 printf("%s\n", new->next->data);
+	 new->next = newDos;
+
+	printf("len: %d",	ft_list_size(new));
+}
+```
+[index](#index)
+
+## ft_range
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_range
+	Expected files   : ft_range.c
+	Allowed functions: malloc
+	--------------------------------------------------------------------------------
+
+	Write the following function:
+
+	int     *ft_range(int start, int end);
+
+	It must allocate (with malloc()) an array of integers, fill it with consecutive
+	values that begin at start and end at end (Including start and end !), then
+	return a pointer to the first value of the array.
+
+	Examples:
+
+	- With (1, 3) you will return an array containing 1, 2 and 3.
+	- With (-1, 2) you will return an array containing -1, 0, 1 and 2.
+	- With (0, 0) you will return an array containing 0.
+	- With (0, -3) you will return an array containing 0, -1, -2 and -3.
+
+</details>
+
+```c
+#include <stdlib.h>
+
+int	*ft_range(int start, int end)
+{
+	int *res;
+	int len;
+	int i = 0;
+	if(start > end)
+		{
+		len = start - end;
+		res = malloc(len + 2 * sizeof(int));
+		while(start >= end)
+			{
+				res[i] = start;
+				start--;
+				i++;
+			}
+		}
+	else
+		{		
+		len = end - start;
+		res = malloc(len + 2 * sizeof(int));
+		len = start;
+		while(start <= end)
+			{
+				res[i] = start;
+				start++;
+				i++;
+			}
+		}
+		res[i] = '\0';
+	return(res);
+}
+```
+```c
+#include <stdio.h>
+
+int main(void)
+{
+	int *cur = ft_range(-0, -3);
+	
+	int i = 0;
+	while(i < 9)
+	{
+		printf("%d ,", cur[i]);
+		i++;
+	}
+	return(0);
+}
+```
+[index](#index)
+
+## ft_rrange
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_rrange
+	Expected files   : ft_rrange.c
+	Allowed functions: malloc
+	--------------------------------------------------------------------------------
+
+	Write the following function:
+
+	int     *ft_rrange(int start, int end);
+
+	It must allocate (with malloc()) an array of integers, fill it with consecutive
+	values that begin at end and end at start (Including start and end !), then
+	return a pointer to the first value of the array.
+
+	Examples:
+
+	- With (1, 3) you will return an array containing 3, 2 and 1
+	- With (-1, 2) you will return an array containing 2, 1, 0 and -1.
+	- With (0, 0) you will return an array containing 0.
+	- With (0, -3) you will return an array containing -3, -2, -1 and 0.
+
+</details>
+
+```c
+int	*ft_rrange(int start, int end)
+{
+	int *res; 
+	int i = 0;
+
+	if(start > end)
+	{	
+		int se = start - end + 1;
+		res = malloc(sizeof(int) * se);
+		while(i < se)
+		{
+			res[i] = start;
+			start --;
+			i++;
+		}
+	}
+	else
+	{
+		int es = end - start + 1;
+		res = malloc(sizeof(int) * es);
+		while(i < es)
+		{
+			res[i] = end;
+			end --;
+			i++;
+		}
+	}	
+	return(res);
+}
+```
+```c
+int main(void)
+{
+
+	int	*arr = ft_rrange(1, 3);
+	int i = 0;
+	while(arr[i] < 5)
+	{
+		printf("%i\n", arr[i]);
+		i++;
+	}
+	return(0);
+}
+```
+[index](#index)
+
+## hidenp
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : hidenp
+	Expected files   : hidenp.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program named hidenp that takes two strings and displays 1
+	followed by a newline if the first string is hidden in the second one,
+	otherwise displays 0 followed by a newline.
+
+	Let s1 and s2 be strings. We say that s1 is hidden in s2 if it's possible to
+	find each character from s1 in s2, in the same order as they appear in s1.
+	Also, the empty string is hidden in any string.
+
+	If the number of parameters is not 2, the program displays a newline.
+
+	Examples :
+
+	$>./hidenp "fgex.;" "tyf34gdgf;'ektufjhgdgex.;.;rtjynur6" | cat -e
+	1$
+	$>./hidenp "abc" "2altrb53c.sse" | cat -e
+	1$
+	$>./hidenp "abc" "btarc" | cat -e
+	0$
+	$>./hidenp | cat -e
+	$
+	$>
+
+</details>
+
+```c
+int	main(int n, char **str)
+{
+	if(n == 3)
+	{
+		int i = 0;
+		while(str[2][i])
+		{
+			if(str[2][i] == *str[1])
+			{
+				++str[1];
+			}
+			if(str[1][0] == '\0')
+			{
+				write(1, "1", 1);
+				break ;
+			}
+			i++;
+		}
+		if(str[2][i] == '\0')
+			write(1, "0", 1);
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
+[index](#index)
+
+## lcm
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : lcm
+	Expected files   : lcm.c
+	Allowed functions:
+	--------------------------------------------------------------------------------
+
+	Write a function who takes two unsigned int as parameters and returns the 
+	computed LCM of those parameters.
+
+	LCM (Lowest Common Multiple) of two non-zero integers is the smallest postive
+	integer divisible by the both integers.
+
+	A LCM can be calculated in two ways:
+
+	- You can calculate every multiples of each integers until you have a common
+	multiple other than 0
+
+	- You can use the HCF (Highest Common Factor) of these two integers and 
+	calculate as follows:
+
+		LCM(x, y) = | x * y | / HCF(x, y)
+		
+		| x * y | means "Absolute value of the product of x by y"
+
+	If at least one integer is null, LCM is equal to 0.
+
+	Your function must be prototyped as follows:
+
+		unsigned int    lcm(unsigned int a, unsigned int b);
+
+</details>
+
+```c
+ #include <stdio.h>
+
+unsigned int    lcm(unsigned int a, unsigned int b)
+{
+	if(a == 0 || b == 0)
+		return(0);
+	unsigned n;
+	if(a > b)
+		n = a;
+	else
+		n = b;
+	while(1)
+	{
+		int aa = n % a;
+		int bb = n % b;
+
+		if(n % a == 0 && n % b == 0)
+			return(n);
+		n++;
+	}
+}
+```
+[index](#index)
+
+## paramsum
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : paramsum
+	Expected files   : paramsum.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that displays the number of arguments passed to it, followed by
+	a newline.
+
+	If there are no arguments, just display a 0 followed by a newline.
+
+	Example:
+
+	$>./paramsum 1 2 3 5 7 24
+	6
+	$>./paramsum 6 12 24 | cat -e
+	3$
+	$>./paramsum | cat -e
+	0$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+void put_nb(int n)
+{
+	if(n > 9)
+		put_nb(n / 10);
+	write(1, &"0123456789"[n % 10], 1);	
+}
+
+int	main(int n, char **str)
+{
+	if(n > 1)
+	{
+		put_nb(n -1);
+	}
+	else
+		write(1, "0", 1);
+	write(1, "\n", 1);
+}
+```
+
+[index](#index)
+
+## pgcd
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : pgcd
+	Expected files   : pgcd.c
+	Allowed functions: printf, atoi, malloc, free
+	--------------------------------------------------------------------------------
+
+	Write a program that takes two strings representing two strictly positive
+	integers that fit in an int.
+
+	Display their highest common denominator followed by a newline (It's always a
+	strictly positive integer).
+
+	If the number of parameters is not 2, display a newline.
+
+	Examples:
+
+	$> ./pgcd 42 10 | cat -e
+	2$
+	$> ./pgcd 42 12 | cat -e
+	6$
+	$> ./pgcd 14 77 | cat -e
+	7$
+	$> ./pgcd 17 3 | cat -e 
+	1$
+	$> ./pgcd | cat -e
+	$
+
+</details>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(int n, char **str)
+{
+	if(n == 3)
+	{
+		int a = atoi(str[1]);
+		int	b = atoi(str[2]);
+		int res;
+
+		if(a > b)
+			res = a;
+		else
+			res = b;
+		while(div)
+		{
+			if(a % res == 0 && b % res == 0)
+			{
+				printf("%d", res);
+				break;
+			}
+			res--;
+		}	
+	}
+	printf("\n");
+	return(0);
+}
+```
+
+[index](#index)
+
+## rstr_capitalizer
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : rstr_capitalizer
+	Expected files   : rstr_capitalizer.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes one or more strings and, for each argument, puts 
+	the last character that is a letter of each word in uppercase and the rest
+	in lowercase, then displays the result followed by a \n.
+
+	A word is a section of string delimited by spaces/tabs or the start/end of the
+	string. If a word has a single letter, it must be capitalized.
+
+	A letter is a character in the set [a-zA-Z]
+
+	If there are no parameters, display \n.
+
+	Examples:
+
+	$> ./rstr_capitalizer | cat -e
+	$
+	$> ./rstr_capitalizer "a FiRSt LiTTlE TESt" | cat -e
+	A firsT littlE tesT$
+	$> ./rstr_capitalizer "SecONd teST A LITtle BiT   Moar comPLEX" "   But... This iS not THAT COMPLEX" "     Okay, this is the last 1239809147801 but not    the least    t" | cat -e
+	seconD tesT A littlE biT   moaR compleX$
+		but... thiS iS noT thaT compleX$
+			okay, thiS iS thE lasT 1239809147801 buT noT    thE leasT    T$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int	main(int n, char **str)
+{
+	if (n >= 2)
+	{
+		int i = 1;
+		while(i < n)
+		{
+			int j = 0;
+			while(str[i][j] != '\0')
+			{
+				if(str[i][j] >= 'A' && str[i][j] <= 'Z')
+					str[i][j] += 32;
+				if((str[i][j + 1] == ' ' || str[i][j + 1] == '\t' || \
+							str[i][j + 1] == '\0') && (str[i][j] >= 'a' && str[i][j] <= 'z'))
+					str[i][j] -= 32;
+				write(1, &str[i][j], 1);
+				j++;
+			}
+			write(1,  "\n", 1);
+			i++;
+		}
+	}
+	else if(n <= 1)
+		write(1,  "\n", 1);
+}
+```
+
+[index](#index)
+
+## str_capitalizer
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : str_capitalizer
+	Expected files   : str_capitalizer.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that takes one or several strings and, for each argument,
+	capitalizes the first character of each word (If it's a letter, obviously),
+	puts the rest in lowercase, and displays the result on the standard output,
+	followed by a \n.
+
+	A "word" is defined as a part of a string delimited either by spaces/tabs, or
+	by the start/end of the string. If a word only has one letter, it must be
+	capitalized.
+
+	If there are no arguments, the progam must display \n.
+
+	Example:
+
+	$> ./str_capitalizer | cat -e
+	$
+	$> ./str_capitalizer "a FiRSt LiTTlE TESt" | cat -e
+	A First Little Test$
+	$> ./str_capitalizer "__SecONd teST A LITtle BiT   Moar comPLEX" "   But... This iS not THAT COMPLEX" "     Okay, this is the last 1239809147801 but not    the least    t" | cat -e
+	__second Test A Little Bit   Moar Complex$
+		But... This Is Not That Complex$
+			Okay, This Is The Last 1239809147801 But Not    The Least    T$
+	$>
+
+</details>
+
+```c
+int	main(int n, char **str)
+{
+	if(n <= 1)
+		write(1, "\n", 1);
+	int i = 1;
+	while(i < n)
+	{
+		int j = 0;
+
+		while(str[i][j] != '\0')
+		{
+			if(str[i][j] >= 'A' && str[i][j] <= 'Z')
+				str[i][j] += 32;
+			j++;
+		}
+		j = 0;
+		while(str[i][j] != '\0')
+		{
+			if(str[i][0] >= 'a' && str[i][0] <= 'z')
+				str[i][0] -= 32;
+			if(str[i][j] == '\t' || str[i][j] == ' ')
+			{
+				if(str[i][j + 1] >= 'a' && str[i][j + 1] <= 'z')
+					str[i][j + 1] -= 32;
+			}
+		
+			write(1, &str[i][j], 1);
+			j++;
+		}
+		write(1, "\n", 1);
+		i++;
+	}
+		return(0);
+}
+```
+
+[index](#index)
+
+## tab_mult
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : tab_mult
+	Expected files   : tab_mult.c
+	Allowed functions: write
+	--------------------------------------------------------------------------------
+
+	Write a program that displays a number's multiplication table.
+
+	The parameter will always be a strictly positive number that fits in an int,
+	and said number times 9 will also fit in an int.
+
+	If there are no parameters, the program displays \n.
+
+	Examples:
+
+	$>./tab_mult 9
+	1 x 9 = 9
+	2 x 9 = 18
+	3 x 9 = 27
+	4 x 9 = 36
+	5 x 9 = 45
+	6 x 9 = 54
+	7 x 9 = 63
+	8 x 9 = 72
+	9 x 9 = 81
+	$>./tab_mult 19
+	1 x 19 = 19
+	2 x 19 = 38
+	3 x 19 = 57
+	4 x 19 = 76
+	5 x 19 = 95
+	6 x 19 = 114
+	7 x 19 = 133
+	8 x 19 = 152
+	9 x 19 = 171
+	$>
+	$>./tab_mult | cat -e
+	$
+	$>
+
+</details>
+
+```c
+int is_digit(char ch)
+{
+	if(ch >= '0' && ch <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int	num(char *n)
+{
+	int res = 0;
+	int i = 0;
+	if(*n == '+')
+		++n;
+	if((*n == '-') || is_digit(*n) == 0)
+		return(0);
+	while(n[i])
+	{
+		res *= 10;
+		res += n[i] - '0';
+		i++;
+	}
+	return(res);
+}
+
+void ft_print_num(int n)
+{
+	if(n >= 10)
+		ft_print_num(n / 10);
+	write(1, &"0123456789"[n % 10], 1);
+
+}
+
+void ft_multi(int mult, int n)
+{
+	int res = mult * n;
+	
+	ft_print_num(res);
+	
+}
+
+int	main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int mult = num(str[1]);
+		if(mult >= 0)
+		{
+			int i = 1;
+			while(i <= 9)
+			{
+				write(1, &"0123456789"[i % 10], 1);
+				write(1, " x ", 3);
+				ft_print_num(mult);
+				write(1, " = ", 3);
+				ft_multi(i, mult);
+				write(1, "\n", 1);
+				i++;
+			}
+		}
+	
+	}
+	else
+		write(1, "\n", 1);
+	return (0);
+}
+```
+
+[index](#index)
+
+# Level 3
+
+## flood_fill
+
+<details>
+<summary>subject</summary>
+
+
+</details>
+
+
+[index](#index)
+
+
+-------------
+
+<details>
+<summary>subject</summary>
+
+
+</details>
+
 
 [index](#index)
