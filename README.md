@@ -6,7 +6,7 @@
 | [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) | 
 | [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |[epur_str](#epur_str)           |
 | [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |[expand_str](#expand_str)       |
-| [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |
+| [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |[ft_atoi_base](#ft_atoi_base)   |
 | [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |
 | [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |
 | [ft_swap](#ft_swap)       | [do_op](#do_op)               |
