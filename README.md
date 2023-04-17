@@ -874,12 +874,12 @@ void	wdmatch(char *s1, char *s2)
 	}
 	write(1, s1, i);
 }
-
-int		main(int n, char **str)
+```
+```c
+int	main(int n, char **str)
 {
 	if (n == 3)
 		wdmatch(str[1], str[2]);
-
 	write(1, "\n", 1);
 	return (0);
 }
