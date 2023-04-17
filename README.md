@@ -1,18 +1,18 @@
 
 ## index
 
-| Level 0                   | Level 1                       | Level 2                        | Level 3                 |
-|---------------------------|-------------------------------|--------------------------------|-------------------------|
-| [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) |[flood_fill](#flood_fill)|
-| [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |[epur_str](#epur_str)           |
-| [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |[expand_str](#expand_str)       |
-| [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |[ft_atoi_base](#ft_atoi_base)   |
-| [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |[ft_list_size](#ft_list_size)   |
-| [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |[ft_range](#ft_range)       |
-| [ft_swap](#ft_swap)       | [do_op](#do_op)               |[ft_rrange](#ft_rrange)         |
-| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |[hidenp](#hidenp)               |
-| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |[lcm](#lcm)                     |
-| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |[paramsum](#paramsum)           |
+| Level 0                   | Level 1                       | Level 2                        | Level 3                           |
+|---------------------------|-------------------------------|--------------------------------|-----------------------------------|
+| [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) |[flood_fill](#flood_fill)          |
+| [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |[epur_str](#epur_str)           |[fprime](#fprime)                  |
+| [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |[expand_str](#expand_str)       |[ft_itoa](#ft_itoa)                |
+| [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |[ft_atoi_base](#ft_atoi_base)   |[ft_list_foreach](#ft_list_foreach)|
+| [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |[ft_list_size](#ft_list_size)   |[ft_list_remove_if](#ft_list_remove_if)|
+| [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |[ft_range](#ft_range)       |[ft_split](#ft_split)              |
+| [ft_swap](#ft_swap)       | [do_op](#do_op)               |[ft_rrange](#ft_rrange)         |[rev_wstr](#rev_wstr)              |
+| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |[hidenp](#hidenp)               |[rostring](#rostring)              |
+| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
+| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
 | [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |[pgcd](#pgcd)         |
 | [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |[rstr_capitalizer](#rstr_capitalizer)|
 |                           | [is_power_of_2](#is_power_of_2) |[str_capitalizer](#str_capitalizer)|
@@ -2882,13 +2882,968 @@ int	main(int n, char **str)
 <details>
 <summary>subject</summary>
 
+	Assignment name  : flood_fill
+	Expected files   : *.c, *.h
+	Allowed functions: -
+	--------------------------------------------------------------------------------
+
+	Write a function that takes a char ** as a 2-dimensional array of char, a 
+	t_point as the dimensions of this array and a t_point as the starting point.
+
+	Starting from the given 'begin' t_point, this function fills an entire zone 
+	by replacing characters inside with the character 'F'. A zone is an group of 
+	the same character delimitated horizontally and vertically by other characters
+	or the array boundry.
+
+	The flood_fill function won't fill diagonally.
+
+	The flood_fill function will be prototyped like this:
+		void  flood_fill(char **tab, t_point size, t_point begin);
+
+	The t_point structure is prototyped like this:
+
+		typedef struct  s_point
+		{
+			int           x;
+			int           y;
+		}               t_point;
+
+	Example:
+
+	$> cat test.c
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include "flood_fill.h"
+
+	char** make_area(char** zone, t_point size)
+	{
+		char** new;
+
+		new = malloc(sizeof(char*) * size.y);
+		for (int i = 0; i < size.y; ++i)
+		{
+			new[i] = malloc(size.x + 1);
+			for (int j = 0; j < size.x; ++j)
+				new[i][j] = zone[i][j];
+			new[i][size.x] = '\0';
+		}
+
+		return new;
+	}
+
+	int main(void)
+	{
+		t_point size = {8, 5};
+		char *zone[] = {
+			"11111111",
+			"10001001",
+			"10010001",
+			"10110001",
+			"11100001",
+		};
+
+		char**  area = make_area(zone, size);
+		for (int i = 0; i < size.y; ++i)
+			printf("%s\n", area[i]);
+		printf("\n");
+
+		t_point begin = {7, 4};
+		flood_fill(area, size, begin);
+		for (int i = 0; i < size.y; ++i)
+			printf("%s\n", area[i]);
+		return (0);
+	}
+
+	$> gcc flood_fill.c test.c -o test; ./test
+	11111111
+	10001001
+	10010001
+	10110001
+	11100001
+
+	FFFFFFFF
+	F000F00F
+	F00F000F
+	F0FF000F
+	FFF0000F
+	$> 
 
 </details>
 
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
+void remplace_fill(char **tab, t_point size, t_point begin, char ch)
+{
+	if (begin.y < 0 || begin.y >= size.y || begin.x < 0 || begin.x >= size.x || tab[begin.y][begin.x] != ch)
+		return;
+	tab[begin.y][begin.x] = 'F';
+	
+	remplace_fill(tab, size, (t_point){begin.x - 1, begin.y}, ch);
+	remplace_fill(tab, size, (t_point){begin.x + 1, begin.y}, ch);
+	remplace_fill(tab, size, (t_point){begin.x, begin.y - 1}, ch);
+	remplace_fill(tab, size, (t_point){begin.x, begin.y + 1}, ch);
+}
+
+void flood_fill(char **tab, t_point size, t_point begin)
+{
+	char ch = tab[begin.y][begin.x];
+	remplace_fill(tab, size, begin, ch);
+}
+```
 
 [index](#index)
 
+## fprime
 
+<details>
+<summary>subject</summary>
+
+	Assignment name  : fprime
+	Expected files   : fprime.c
+	Allowed functions: printf, atoi
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a positive int and displays its prime factors on the
+	standard output, followed by a newline.
+
+	Factors must be displayed in ascending order and separated by '*', so that
+	the expression in the output gives the right result.
+
+	If the number of parameters is not 1, simply display a newline.
+
+	The input, when there is one, will be valid.
+
+	Examples:
+
+	$> ./fprime 225225 | cat -e
+	3*3*5*5*7*11*13$
+	$> ./fprime 8333325 | cat -e
+	3*3*5*5*7*11*13*37$
+	$> ./fprime 9539 | cat -e
+	9539$
+	$> ./fprime 804577 | cat -e
+	804577$
+	$> ./fprime 42 | cat -e
+	2*3*7$
+	$> ./fprime 1 | cat -e
+	1$
+	$> ./fprime | cat -e
+	$
+	$> ./fprime 42 21 | cat -e
+	$
+
+</details>
+
+```c
+nu#include <stdlib.h>
+#include <stdio.h>
+
+int is_prime(int n)
+{
+	int i = 2;
+	while (i < n)
+	{
+		if (n % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int main(int n, char **str)
+{
+	if (n == 2)
+	{
+		int num = atoi(str[1]);
+		if (num > 0)
+		{
+			if (is_prime(num))
+				printf("%d", num);
+			else
+			{
+				int i = 2;
+				while (num != 1)
+				{
+					if (is_prime(i))
+					{
+						while (num % i == 0)
+						{
+							num /= i;
+							printf("%d", i);
+							if (num != 1)
+								printf("*");
+						}
+					}
+					i++;
+				}
+			}
+		}
+	}
+	printf("\n");
+	return (0);
+}
+```
+
+[index](#index)
+
+## ft_itoa
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_itoa
+	Expected files   : ft_itoa.c
+	Allowed functions: malloc
+	--------------------------------------------------------------------------------
+
+	Write a function that takes an int and converts it to a null-terminated string.
+	The function returns the result in a char array that you must allocate.
+
+	Your function must be declared as follows:
+
+	char	*ft_itoa(int nbr);
+
+</details>
+
+```c
+int	ft_len_num(long n)
+{
+	int len = 0;
+
+	while(n > 0)
+	{
+		n/= 10;
+		len++;
+	}
+	return(len);
+}
+
+
+char	*ft_itoa(int nbr)
+{
+	char *res;
+	long num = nbr;
+	int len = 0;
+	int neg = 0;
+	
+	if (num == 0)
+		len = 1;
+	else if(num < 0)
+	{
+		len++;
+		num *= -1;
+		neg = 1;
+	}
+	len += ft_len_num(num);
+	res = (char*)malloc((len + 1) * sizeof(char));
+	if(neg)
+		res[0] = '-';
+	if(num == 0)
+		res[0] = '0';
+	len-= 1;
+	while(num > 0)
+	{
+		res[len] = (num % 10) + '0';
+		num/= 10;
+		len--;	
+	}
+	return(res);
+}
+```
+[index](#index)
+
+## ft_list_foreach
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_list_foreach
+	Expected files   : ft_list_foreach.c, ft_list.h
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write a function that takes a list and a function pointer, and applies this
+	function to each element of the list.
+
+	It must be declared as follows:
+
+	void    ft_list_foreach(t_list *begin_list, void (*f)(void *));
+
+	The function pointed to by f will be used as follows:
+
+	(*f)(list_ptr->data);
+
+	You must use the following structure, and turn it in as a file called
+	ft_list.h:
+
+	typedef struct    s_list
+	{
+			struct s_list *next;
+			void          *data;
+	}                 t_list;
+
+</details>
+
+```c
+#include <stdlib.h>
+#include "ft_list.h"
+#include <stdio.h>
+
+void ft_pot(void *n)
+{
+	int *tp = (int *)n;
+	*tp = *tp * 2;
+}
+
+ void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
+{
+	t_list *cur = begin_list;
+	while(cur)
+	{
+		f(cur->data);
+		cur = cur->next;
+	}
+}
+```
+```c
+void print_lst(t_list *lst)
+{
+	int i = 0;
+	while (lst != 0)
+	{
+		printf("\e[5;32m%d\n\e[0m", *(int *)(lst->data));
+		lst = lst->next;
+		i++;
+	}
+}
+
+int main(void)
+{
+	t_list *c = calloc(1, sizeof(t_list));
+	int n_c = 12;
+	c->data = &n_c;
+
+	t_list *b = calloc(1, sizeof(t_list));
+	b->next = c;
+	int n_b = 6;
+	b->data = &n_b;
+
+	t_list *a = calloc(1, sizeof(t_list));
+	a->next = b;
+	int n_a = 42;
+	a->data = &n_a;
+
+	t_list *cur = a;
+
+	print_lst(cur);
+//	ft_pot(a->data);
+	ft_list_foreach(cur, ft_pot);
+	printf("-----\n");
+	print_lst(cur);
+
+	return (0);
+}
+```
+
+[index](#index)
+
+## ft_list_remove_if
+
+<details>
+<summary>subject</summary>
+	Assignment name  : ft_list_remove_if
+	Expected files   : ft_list_remove_if.c
+	Allowed functions: free
+	--------------------------------------------------------------------------------
+
+	Write a function called ft_list_remove_if that removes from the
+	passed list any element the data of which is "equal" to the reference data.
+	int
+	It will be declared as follows :
+
+	void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+
+	cmp takes two void* and returns 0 when both parameters are equal.
+
+	You have to use the ft_list.h file, which will contain:
+
+	$>cat ft_list.h
+	typedef struct      s_list
+	{
+			struct s_list   *next;
+			void            *data;
+	}                   t_list;
+	$>
+
+</details>
+
+```c
+typedef struct	s_list
+{
+    struct s_list   *next;
+    void            *data;
+}	t_list;
+
+int	ft_compare(int a, int b)
+{
+	return(a == b); 
+}
+
+void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+{
+	t_list *cur = *begin_list;
+
+	while(cur)
+	{
+		if(cmp(cur->data, data_ref) == 1) 
+		{
+			*begin_list = cur->next;
+			free(cur);
+		}
+		cur = cur->next;
+	}
+}
+```
+
+```c
+void print_lst(t_list *lst)
+{
+	while(lst)
+	{
+		printf("%i\n", *(int*)lst->data);
+		lst = lst->next;
+	}
+}
+int	main(void)
+{
+	t_list *c = calloc(1, sizeof(t_list));
+	int	c_i = 42;
+	c->data = &c_i;
+	
+	t_list *b = calloc(1, sizeof(t_list));
+	int b_i = 12;
+	b->data = &b_i;
+	b->next = c;
+	
+	t_list *a = calloc(1, sizeof(t_list));
+	int	a_i = 5;
+	a->data = &a_i;
+	a->next = b;
+
+	t_list **cur = &a;
+	int	*delete_item;
+
+	delete_item = &c_i;
+	print_lst(*cur);
+	
+	ft_list_remove_if(cur, delete_item, ft_compare);
+	printf("\n");
+	print_lst(*cur);
+}
+```
+
+[index](#index)
+
+## ft_split
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : ft_split
+	Expected files   : ft_split.c
+	Allowed functions: malloc
+	--------------------------------------------------------------------------------
+
+	Write a function that takes a string, splits it into words, and returns them as
+	a NULL-terminated array of strings.
+
+	A "word" is defined as a part of a string delimited either by spaces/tabs/new
+	lines, or by the start/end of the string.
+
+	Your function must be declared as follows:
+
+	char    **ft_split(char *str);
+
+</details>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+char *g_str;
+int g_word;
+
+int count_words(char *str)
+{
+	int i = 0;
+	int words = 0;
+
+	if (str[i] == '\0')
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			words++;
+		i++;
+	}
+	if (str[i - 1] == ' ')
+		words -= 1;
+	if (str[0] == ' ')
+		words -= 1;
+	words += 1;
+	return (words);
+}
+void pasar(int len, char *tmp, char **res)
+{
+	int i = 0;
+	res[g_word] = calloc(len, sizeof(char));
+	while (i < len)
+	{
+		res[g_word][i] = tmp[i];
+		i++;
+	}
+	g_word++;
+
+}
+
+void solo_word(int words, char **res)
+{
+	int len = 0;
+	char *tmp;
+	if (words == g_word)
+		return;
+	if (*g_str == ' ')
+		++g_str;
+	tmp = g_str;
+	while (*g_str)
+	{
+		if (*g_str != ' ')
+		{
+			++g_str;
+			len++;
+		}
+		else
+		{
+			pasar(len, tmp, res);
+			solo_word(words, res);
+		}
+	}
+	pasar(len, tmp, res);
+}
+char **ft_split(char *str)
+{
+	g_str = str;
+	char **res;
+	int words = count_words(str);
+
+	res = calloc((words + 1), sizeof(char *));
+	if (!res)
+		return (NULL);
+
+	solo_word(words, res);
+	return (res);
+}
+```
+```c
+void print_dp(char **str)
+{
+	int i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			printf("%s", str[i]);
+			i++;
+		}
+	}
+	else
+		printf("nada\n");
+}
+
+int main(void)
+{
+
+	char *str = "42 Barcelona ";
+	char **esto;
+
+	esto = ft_split(str);
+	print_dp(esto);
+	return (0);
+}
+```
+
+[index](#index)
+
+## rev_wstr
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : rev_wstr
+	Expected files   : rev_wstr.c
+	Allowed functions: write, malloc, free
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string as a parameter, and prints its words in 
+	reverse order.
+
+	A "word" is a part of the string bounded by spaces and/or tabs, or the 
+	begin/end of the string.
+
+	If the number of parameters is different from 1, the program will display 
+	'\n'.
+
+	In the parameters that are going to be tested, there won't be any "additional" 
+	spaces (meaning that there won't be additionnal spaces at the beginning or at 
+	the end of the string, and words will always be separated by exactly one space).
+
+	Examples:
+
+	$> ./rev_wstr "You hate people! But I love gatherings. Isn't it ironic?" | cat -e
+	ironic? it Isn't gatherings. love I But people! hate You$
+	$>./rev_wstr "abcdefghijklm"
+	abcdefghijklm
+	$> ./rev_wstr "Wingardium Leviosa" | cat -e
+	Leviosa Wingardium$
+	$> ./rev_wstr | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int ft_len(char *str)
+{
+	int i = 0;
+
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+int main(int n, char **str)
+{
+	if (n == 2)
+	{
+		int i = 0;
+		int len = ft_len(str[1]) - 1;
+		int end = len;
+		while (len || end)
+		{
+			if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
+			{
+				if (!len)
+					i = 0;
+				else
+					i = len + 1;
+				while (i <= end)
+				{
+					write(1, &str[1][i], 1);
+					i++;
+				}
+				if (!len)
+					break;
+				if (i >= end)
+				{
+					write(1, &str[1][len], 1);
+					end = len - 1;
+				}
+			}
+			len--;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+```
+
+[index](#index)
+
+## rostring
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : rostring
+	Expected files   : rostring.c
+	Allowed functions: write, malloc, free
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string and displays this string after rotating it
+	one word to the left.
+
+	Thus, the first word becomes the last, and others stay in the same order.
+
+	A "word" is defined as a part of a string delimited either by spaces/tabs, or
+	by the start/end of the string.
+
+	Words will be separated by only one space in the output.
+
+	If there's less than one argument, the program displays \n.
+
+	Example:
+
+	$>./rostring "abc   " | cat -e
+	abc$
+	$>
+	$>./rostring "Que la      lumiere soit et la lumiere fut"
+	la lumiere soit et la lumiere fut Que
+	$>
+	$>./rostring "     AkjhZ zLKIJz , 23y"
+	zLKIJz , 23y AkjhZ
+	$>
+	$>./rostring "first" "2" "11000000"
+	first
+	$>
+	$>./rostring | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+
+char *ft_less(char *s)
+{
+	
+	while(*s == ' ')
+		s++;
+	return(s);
+}
+
+#include <stdio.h> 
+
+int	main(int n, char **str)
+{
+	if(n >= 2)
+	{
+		char *tmp = ft_less(str[1]);
+		int i = 0;
+		while(tmp[i] != ' ' && tmp[i] != '\0')
+			i++;
+		char *word = malloc(i * sizeof(char));
+		int j = 0;
+		while(j < i)
+		{
+			word[j] = tmp[j];
+			j++;
+		}
+		j = 0;
+		while(j < i)
+		{
+			tmp++;
+			j++;
+		}		
+		tmp = ft_less(tmp);
+		i = 0;
+		j = 0;
+		while(tmp[i])
+		{
+			
+			if(tmp[i] != ' ' && tmp[i] != '\t')
+				{
+					if((tmp[i - 1] == ' ' || tmp[i - 1] == '\t') && i)
+						write(1, " ", 1);
+					write(1, &tmp[i], 1);
+				}
+			i++;
+			j = 1;
+		}	
+		if(j)
+			write(1, " ", 1);
+		i = 0;
+		while(word[i])
+		{
+			write(1, &word[i], 1);
+			i++;
+		}
+	free(word);	
+	}
+	write(1, "\n", 1);
+	return(0);
+}
+```
+
+[index](#index)
+
+## sort_int_tab
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : sort_int_tab
+	Expected files   : sort_int_tab.c
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write the following function:
+
+	void sort_int_tab(int *tab, unsigned int size);
+
+	It must sort (in-place) the 'tab' int array, that contains exactly 'size'
+	members, in ascending order.
+
+	Doubles must be preserved.
+
+	Input is always coherent.`
+
+</details>
+
+```c
+#include <stdio.h>
+
+void sort_int_tab(int *tab, unsigned int size)
+{
+	unsigned int i = 0;
+	int temp;
+	while (i < (size - 1))
+	{
+		if (tab[i] > tab[i + 1])
+		{
+			temp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = temp;
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
+void print_arr(int *tab, unsigned int size)
+{
+	unsigned int i = 0;
+
+	while (i < size)
+	{
+		printf("%i,", tab[i]);
+		i++;
+	}
+	printf("\n");
+}
+int main(void)
+{
+	int arr[] = {2, 3, -1, -4, 5, 6};
+	unsigned int size = sizeof(arr) / sizeof(*arr);
+	print_arr(arr, size);
+	//	swap_int(&arr[0], &arr[1]);
+	sort_int_tab(arr, size);
+	print_arr(arr, size);
+}
+```
+
+[index](#index)
+
+## sort_list
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : sort_list
+	Expected files   : sort_list.c
+	Allowed functions: 
+	--------------------------------------------------------------------------------
+
+	Write the following functions:
+
+	t_list	*sort_list(t_list* lst, int (*cmp)(int, int));
+
+	This function must sort the list given as a parameter, using the function 
+	pointer cmp to select the order to apply, and returns a pointer to the 
+	first element of the sorted list.
+
+	Duplications must remain.
+
+	Inputs will always be consistent.
+
+	You must use the type t_list described in the file list.h 
+	that is provided to you. You must include that file 
+	(#include "list.h"), but you must not turn it in. We will use our own 
+	to compile your assignment.
+
+	Functions passed as cmp will always return a value different from 
+	0 if a and b are in the right order, 0 otherwise.
+
+	For example, the following function used as cmp will sort the list 
+	in ascending order:
+
+	int ascending(int a, int b)
+	{
+		return (a <= b);
+	}
+
+</details>
+
+```c
+t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+{
+	int tmp;
+	t_list *lst_tmp = lst;
+	int flag = 1;
+
+	while(flag)
+	{
+		flag = 0;
+		while(lst_tmp && lst_tmp->next)
+		{
+			if(cmp(lst_tmp->data, lst_tmp->next->data) == 0)
+			{
+				flag = 1;
+				tmp = lst_tmp->data;
+				lst_tmp->data = lst_tmp->next->data;
+				lst_tmp->next->data = tmp;
+			}
+			lst_tmp = lst_tmp->next;	
+		}
+		lst_tmp = lst;
+	}
+	return(lst);
+}
+```
+```c
+int	main(void)
+{
+	t_list *a = calloc(1, sizeof(t_list));
+	t_list *b = calloc(1, sizeof(t_list));
+	t_list *c = calloc(1, sizeof(t_list));
+	c->data = 45;
+	b->data = 73;
+	b->next = c;
+	a->data = 108;
+	a->next = b;
+
+printf("\t\tfunc %d\n",ascending(b->data, c->data));
+
+	t_list *cur = a;
+	while(cur)
+	{
+		printf("%d\n", cur->data);
+		cur= cur->next;
+	}
+
+	t_list *res = sort_list(a, ascending);
+	while(res)
+	{
+		printf("\t%d\n", res->data);
+		res = res->next;
+	}
+}
+```
+[index](#index)
+
+<!-- 
 -------------
 
 <details>
@@ -2897,5 +3852,4 @@ int	main(int n, char **str)
 
 </details>
 
-
-[index](#index)
+[index](#index) -->
