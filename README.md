@@ -1,9 +1,9 @@
 
 ## indice
 
-| Level 0                   | Level 1                       | Level 2         | Level 3        |
-|---------------------------|-------------------------------|-----------------|----------------|
-| [ft_putstr](#ft_putstr)   | [inter](#inter)               |
+| Level 0                   | Level 1                       | Level 2                        | Level 3        |
+|---------------------------|-------------------------------|--------------------------------|----------------|
+| [ft_putstr](#ft_putstr)   | [inter](#inter)               |[add_prime_sum](#add_prime_sum) | 
 | [ft_strlen](#ft_strlen)   | [reverse_bits](#reverse_bits) |
 | [rev_print](#rev_print)   | [wdmatch](#wdmatch)           |
 | [first_word](#first_word) | [alpha_mirror](#alpha_mirror) |
@@ -1834,6 +1834,106 @@ int main(int n, char **str)
 
 # Level 2
 
+## add_prime_sum
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : add_prime_sum
+	Expected files   : add_prime_sum.c
+	Allowed functions: write, exit
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a positive integer as argument and displays the sum
+	of all prime numbers inferior or equal to it followed by a newline.
+
+	If the number of arguments is not 1, or the argument is not a positive number,
+	just display 0 followed by a newline.
+
+	Yes, the examples are right.
+
+	Examples:
+
+	$>./add_prime_sum 5
+	10
+	$>./add_prime_sum 7 | cat -e
+	17$
+	$>./add_prime_sum | cat -e
+	0$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int ft_num(char *num)
+{
+	int i = 0;
+	int res = 0;
+	while(num[i])
+	{
+		res*= 10;
+		res+= num[i] - '0';
+		i++;
+	}
+	return(res);
+}
+
+int is_prime(int num)
+{
+	int i = 2;
+	while(i < num)
+	{
+		if(num % i == 0)
+			return(0);
+		i++;
+	}
+return(1);
+}
+
+void ft_print_n(int n)
+{
+	if(n > 9)
+		ft_print_n(n / 10);
+	write(1, &"0123456789"[n % 10],1);	
+}
+
+int main(int n, char **str)
+{
+	if(n == 2)
+	{
+		int i = 0;
+		int res = 0;
+		while(str[1][i] != '\0')
+		{
+			if(str[1][i] > '9' || str[1][i] < '0')
+			{
+				write(1, "0\n", 2);
+				return(0);
+			}
+			i++;
+		}
+		int num = ft_num(str[1]);
+		i = 2;
+		while(i <= num)
+		{
+			if(is_prime(i))
+				res+= i;
+			i++;
+		}
+		ft_print_n(res);
+		write(1, "\n", 1);
+	}
+	else
+		write(1, "0\n", 2);
+
+	return(0);
+}
+
+```
+
+[Indice](#indice)
 -------------
 <details>
 <summary>subject</summary>
