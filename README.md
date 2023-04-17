@@ -14,10 +14,10 @@
 | [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
 | [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
 | [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |[pgcd](#pgcd)         |
-| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |[rstr_capitalizer](#rstr_capitalizer)|
-|                           | [is_power_of_2](#is_power_of_2) |[str_capitalizer](#str_capitalizer)|
-|                           | [last_word](#last_word)         |[tab_mult](#tab_mult)         |
-|                           | [max](#max)                     |
+| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |[print_hex](#print_hex)         |
+|                           | [is_power_of_2](#is_power_of_2) |[rstr_capitalizer](#rstr_capitalizer)|
+|                           | [last_word](#last_word)         |[str_capitalizer](#str_capitalizer)|
+|                           | [max](#max)                     |[tab_mult](#tab_mult)         |
 |                           | [print_bits](#print_bits)       |
 |                           | [snake_to_camel](#snake_to_camel) |
 |                           | [strcmp](#strcmp)               |
