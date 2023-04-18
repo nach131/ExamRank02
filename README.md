@@ -3629,46 +3629,46 @@ int main(void)
 
 int ft_len(char *str)
 {
-	int i = 0;
+  int i = 0;
 
-	while (str[i] != '\0')
-		i++;
-	return (i);
+  while (str[i] != '\0')
+   i++;
+  return (i);
 }
 
 int main(int n, char **str)
 {
-	if (n == 2)
-	{
-		int i = 0;
-		int len = ft_len(str[1]) - 1;
-		int end = len;
-		while (len || end)
-		{
-			if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
-			{
-				if (!len)
-					i = 0;
-				else
-					i = len + 1;
-				while (i <= end)
-				{
-					write(1, &str[1][i], 1);
-					i++;
-				}
-				if (!len)
-					break;
-				if (i >= end)
-				{
-					write(1, &str[1][len], 1);
-					end = len - 1;
-				}
-			}
-			len--;
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
+  if (n == 2)
+  {
+   int i = 0;
+   int len = ft_len(str[1]) - 1;
+   int end = len;
+   while (len || end)
+   {
+     if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
+     {
+      if (!len)
+        i = 0;
+      else
+        i = len + 1;
+      while (i <= end)
+      {
+        write(1, &str[1][i], 1);
+        i++;
+      }
+      if (!len)
+        break;
+      if (i >= end)
+      {
+        write(1, &str[1][len], 1);
+        end = len - 1;
+      }
+     }
+     len--;
+   }
+  }
+  write(1, "\n", 1);
+  return (0);
 }
 ```
 
