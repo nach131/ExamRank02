@@ -3191,48 +3191,57 @@ int main(int n, char **str)
 </details>
 
 ```c
-int	ft_len_num(long n)
-{
-	int len = 0;
+#include <stdlib.h>
 
-	while(n > 0)
-	{
-		n/= 10;
-		len++;
-	}
-	return(len);
+int len_num(int n)
+{
+    int i = 0;
+    while(n)
+    {
+        n/= 10;
+        i++;
+    }
+    return(i);
 }
 
-
-char	*ft_itoa(int nbr)
+char    *ft_itoa(int nbr)
 {
-	char *res;
-	long num = nbr;
-	int len = 0;
-	int neg = 0;
-	
-	if (num == 0)
-		len = 1;
-	else if(num < 0)
-	{
-		len++;
-		num *= -1;
-		neg = 1;
-	}
-	len += ft_len_num(num);
-	res = (char*)malloc((len + 1) * sizeof(char));
-	if(neg)
-		res[0] = '-';
-	if(num == 0)
-		res[0] = '0';
-	len-= 1;
-	while(num > 0)
-	{
-		res[len] = (num % 10) + '0';
-		num/= 10;
-		len--;	
-	}
-	return(res);
+    char *res;
+    int len = len_num(nbr);
+    if(nbr == 0)
+    {
+        res = malloc(2 * sizeof(char));
+        res[0] = '0';
+        res[1] = '\0';
+        return(res);
+    }
+    if(nbr < 0)
+        len++;
+    res = malloc((len + 1) * sizeof(char));
+    if(nbr < 0)
+    {
+        res[0] = '-';
+        nbr*= -1;
+    }
+    res[len] = '\0';
+    len--;
+    while(nbr)
+    {
+        res[len] = (nbr % 10) + '0';
+        nbr/= 10;
+        len--;
+    }
+    return(res);
+}
+```
+```c
+#include <stdlib.h>
+
+int main(int n, char **str)
+{
+    printf("%s\n",ft_itoa(atoi(str[1])));
+//  printf("%s\n",ft_itoa(-42));
+    return(0);
 }
 ```
 [index](#index)
