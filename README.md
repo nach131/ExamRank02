@@ -3812,14 +3812,14 @@ int	main(int n, char **str)
 void sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int i = 0;
-	int temp;
+	int tmp;
 	while (i < (size - 1))
 	{
 		if (tab[i] > tab[i + 1])
 		{
-			temp = tab[i];
+			tmp = tab[i];
 			tab[i] = tab[i + 1];
-			tab[i + 1] = temp;
+			tab[i + 1] = tmp;
 			i = 0;
 		}
 		else
@@ -3839,16 +3839,18 @@ void print_arr(int *tab, unsigned int size)
 	}
 	printf("\n");
 }
+
 int main(void)
 {
 	int arr[] = {2, 3, -1, -4, 5, 6};
 	unsigned int size = sizeof(arr) / sizeof(*arr);
 	print_arr(arr, size);
-	//	swap_int(&arr[0], &arr[1]);
 	sort_int_tab(arr, size);
 	print_arr(arr, size);
 }
 ```
+	2,3,-1,-4,5,6,
+	-4,-1,2,3,5,6,
 
 [index](#index)
 
