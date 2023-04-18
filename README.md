@@ -3374,77 +3374,77 @@ int main(void)
 ```c
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-	t_list	*lst;
-	t_list	*tmp;
+   t_list *lst;
+   t_list *tmp;
 
-	lst = *begin_list;
-	while (lst && !cmp(data_ref, lst->data))
-	{
-		*begin_list = (*begin_list)->next;
-		free(lst);
-		lst = *begin_list;
-	}
-	while (lst)
-	{
-		if (lst->next && !cmp(data_ref, lst->next->data))
-		{
-			tmp = lst->next;
-			lst->next = lst->next->next;
-			free (tmp);
-		}
-		else
-			lst = lst->next;
-	}
+   lst = *begin_list;
+   while (lst && !cmp(data_ref, lst->data))
+   {
+      *begin_list = (*begin_list)->next;
+      free(lst);
+      lst = *begin_list;
+   }
+   while (lst)
+   {
+      if (lst->next && !cmp(data_ref, lst->next->data))
+      {
+         tmp = lst->next;
+         lst->next = lst->next->next;
+         free (tmp);
+      }
+      else
+         lst = lst->next;
+   }
 }
 ```
 ```c
-typedef struct	s_list
+typedef struct   s_list
 {
     struct s_list   *next;
     void            *data;
-}	t_list;
+}   t_list;
 
-int	ft_compare(int a, int b)
+int ft_compare(int a, int b)
 {
-	return(a > b || a < b);
+   return(a > b || a < b);
 }
 
 void print_lst(t_list *lst)
 {
-	while(lst)
-	{
-		printf("%i\n", *(int*)lst->data);
-		lst = lst->next;
-	}
+   while(lst)
+   {
+      printf("%i\n", *(int*)lst->data);
+      lst = lst->next;
+   }
 }
-int	main(void)
+int main(void)
 {
-	t_list *a = calloc(1, sizeof(t_list));
-	t_list *b = calloc(1, sizeof(t_list));
-	t_list *c = calloc(1, sizeof(t_list));
-	t_list *d = calloc(1, sizeof(t_list));
-	
-	int	a_i = 5;
-	int b_i = 12;
-	int	c_i = 42;
-	int d_i = 5;
+   t_list *a = calloc(1, sizeof(t_list));
+   t_list *b = calloc(1, sizeof(t_list));
+   t_list *c = calloc(1, sizeof(t_list));
+   t_list *d = calloc(1, sizeof(t_list));
+   
+   int a_i = 5;
+   int b_i = 12;
+   int c_i = 42;
+   int d_i = 5;
 
-	a->data = &a_i;
-	b->data = &b_i;
-	c->data = &c_i;
-	d->data = &a_i;
+   a->data = &a_i;
+   b->data = &b_i;
+   c->data = &c_i;
+   d->data = &a_i;
 
-	a->next = b;
-	b->next = c;
-	c->next = d;
+   a->next = b;
+   b->next = c;
+   c->next = d;
 
-	t_list **cur = &a;
-	print_lst(*cur);
-	int *delete_item = &a_i;
+   t_list **cur = &a;
+   print_lst(*cur);
+   int *delete_item = &a_i;
 
-	ft_list_remove_if(cur, delete_item, ft_compare);
-	printf("-----\n");
-	print_lst(*cur);
+   ft_list_remove_if(cur, delete_item, ft_compare);
+   printf("-----\n");
+   print_lst(*cur);
 }
 ```
 	5
