@@ -2604,7 +2604,7 @@ int	main(int n, char **str)
 			res = a;
 		else
 			res = b;
-		while(div)
+		while(1)
 		{
 			if(a % res == 0 && b % res == 0)
 			{
