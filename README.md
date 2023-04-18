@@ -2419,9 +2419,7 @@ int	main(int n, char **str)
 		while(str[2][i])
 		{
 			if(str[2][i] == *str[1])
-			{
 				++str[1];
-			}
 			if(str[1][0] == '\0')
 			{
 				write(1, "1", 1);
