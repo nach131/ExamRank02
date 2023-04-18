@@ -2652,41 +2652,41 @@ int	main(int n, char **str)
 ```c
 #include <unistd.h>
 
-int	ft_num(char *n)
+int ft_num(char *n)
 {
-	int res = 0;
-	int i = 0;
-	while(n[i])
-		{
-			res*= 10;
-			res+= n[i] - '0';
-			i++;
-		}	
-	return(res);
+  int res = 0;
+  int i = 0;
+  while(n[i])
+    {
+      res*= 10;
+      res+= n[i] - '0';
+      i++;
+    }
+  return(res);
 }
 
 void ft_print_hexa(int num)
 {
-		if(num > 16)
-			ft_print_hexa(num / 16);
-		write(1, &"0123456789abcdef"[num % 16], 1);
+    if(num > 16)
+      ft_print_hexa(num / 16);
+    write(1, &"0123456789abcdef"[num % 16], 1);
 }
 
-int	main(int n, char **str)
+int  main(int n, char **str)
 {
-	if(n == 2)
-	{	
-		if(str[1][0] == '-' || (str[1][0] >= 'a' && str[1][0] <= 'z')
-				|| (str[1][0] >= 'A' && str[1][0] <= 'Z'))
-			{
-				write(1, "\n", 1);
-				return(1);
-			}	
-		int num = ft_num(str[1]);
-		ft_print_hexa(num);
-	}
-	write(1, "\n", 1);
-	return(0);
+  if(n == 2)
+  {  
+    if(str[1][0] == '-' || (str[1][0] >= 'a' && str[1][0] <= 'z')
+        || (str[1][0] >= 'A' && str[1][0] <= 'Z'))
+      {
+        write(1, "\n", 1);
+        return(1);
+      }
+    int num = ft_num(str[1]);
+    ft_print_hexa(num);
+  }
+  write(1, "\n", 1);
+  return(0);
 }
 ```
 
