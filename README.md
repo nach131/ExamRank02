@@ -10,7 +10,7 @@
 | [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |[ft_list_size](#ft_list_size)   |[ft_list_remove_if](#ft_list_remove_if)|
 | [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |[ft_range](#ft_range)       |[ft_split](#ft_split)              |
 | [ft_swap](#ft_swap)       | [do_op](#do_op)               |[ft_rrange](#ft_rrange)         |[rev_wstr](#rev_wstr)              |
-| [repeat_alpha](#repeat_alpha) [ft_strcmp](#ft_strcmp)     |[hidenp](#hidenp)               |[rostring](#rostring)              |
+| [repeat_alpha](#repeat_alpha)|[ft_strcmp](#ft_strcmp)     |[hidenp](#hidenp)               |[rostring](#rostring)              |
 | [rot_13](#rot_13)         | [ft_strcspn](#ft_strcspn)     |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
 | [rotone](#rotone)         | [ft_strdup](#ft_strdup)       |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
 | [search_and_replace](#search_and_replace) | [ft_strpbrk](#ft_strpbrk) [pgcd](#pgcd)        |
