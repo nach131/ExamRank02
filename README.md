@@ -2546,9 +2546,7 @@ void put_nb(int n)
 int	main(int n, char **str)
 {
 	if(n > 1)
-	{
 		put_nb(n -1);
-	}
 	else
 		write(1, "0", 1);
 	write(1, "\n", 1);
