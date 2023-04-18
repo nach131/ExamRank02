@@ -2797,37 +2797,37 @@ int	main(int n, char **str)
 ```c
 int	main(int n, char **str)
 {
-	if(n <= 1)
-		write(1, "\n", 1);
-	int i = 1;
-	while(i < n)
-	{
-		int j = 0;
+  if(n <= 1)
+    write(1, "\n", 1);
+  int i = 1;
+  while(i < n)
+  {
+    int j = 0;
 
-		while(str[i][j] != '\0')
-		{
-			if(str[i][j] >= 'A' && str[i][j] <= 'Z')
-				str[i][j] += 32;
-			j++;
-		}
-		j = 0;
-		while(str[i][j] != '\0')
-		{
-			if(str[i][0] >= 'a' && str[i][0] <= 'z')
-				str[i][0] -= 32;
-			if(str[i][j] == '\t' || str[i][j] == ' ')
-			{
-				if(str[i][j + 1] >= 'a' && str[i][j + 1] <= 'z')
-					str[i][j + 1] -= 32;
-			}
-		
-			write(1, &str[i][j], 1);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
-		return(0);
+    while(str[i][j] != '\0')
+    {
+      if(str[i][j] >= 'A' && str[i][j] <= 'Z')
+        str[i][j] += 32;
+      j++;
+    }
+    j = 0;
+    while(str[i][j] != '\0')
+    {
+      if(str[i][0] >= 'a' && str[i][0] <= 'z')
+        str[i][0] -= 32;
+      if(str[i][j] == '\t' || str[i][j] == ' ')
+      {
+        if(str[i][j + 1] >= 'a' && str[i][j + 1] <= 'z')
+          str[i][j + 1] -= 32;
+      }
+    
+      write(1, &str[i][j], 1);
+      j++;
+    }
+    write(1, "\n", 1);
+    i++;
+  }
+    return(0);
 }
 ```
 
