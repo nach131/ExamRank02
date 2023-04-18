@@ -3116,49 +3116,51 @@ void flood_fill(char **tab, t_point size, t_point begin)
 nu#include <stdlib.h>
 #include <stdio.h>
 
+#include <stdlib.h>
+#include <stdio.h>
+
 int is_prime(int n)
 {
-	int i = 2;
-	while (i < n)
-	{
-		if (n % i == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+    int i = 2;
+    while(i < n)
+    {
+        if(n % i == 0)
+            return(0);
+        i++;
+    }
+    return(1);
 }
 
 int main(int n, char **str)
 {
-	if (n == 2)
-	{
-		int num = atoi(str[1]);
-		if (num > 0)
-		{
-			if (is_prime(num))
-				printf("%d", num);
-			else
-			{
-				int i = 2;
-				while (num != 1)
-				{
-					if (is_prime(i))
-					{
-						while (num % i == 0)
-						{
-							num /= i;
-							printf("%d", i);
-							if (num != 1)
-								printf("*");
-						}
-					}
-					i++;
-				}
-			}
-		}
-	}
-	printf("\n");
-	return (0);
+    if(n == 2)
+    {
+        int num = atoi(str[1]);
+        if(num > 0)
+        {
+            if(is_prime(num))
+                printf("%d", num);
+            else
+            {
+                int i = 2;
+                while(num != 1)
+                {
+                    if(is_prime(i))
+                    {
+                        while(num % i == 0)
+                        {
+                            num/= i;
+                            printf("%d", i);
+                            if(num != 1)
+                                printf("*");
+                        }
+                    }
+                    i++;
+                }
+            }
+        }
+    }
+    printf("\n");
 }
 ```
 
