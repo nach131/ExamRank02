@@ -3858,29 +3858,29 @@ int main(void)
 </details>
 
 ```c
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+t_list  *sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	int tmp;
-	t_list *lst_tmp = lst;
-	int flag = 1;
+    t_list *cur = lst;
+    int flag = 1;
+    int num;
 
-	while(flag)
-	{
-		flag = 0;
-		while(lst_tmp && lst_tmp->next)
-		{
-			if(cmp(lst_tmp->data, lst_tmp->next->data) == 0)
-			{
-				flag = 1;
-				tmp = lst_tmp->data;
-				lst_tmp->data = lst_tmp->next->data;
-				lst_tmp->next->data = tmp;
-			}
-			lst_tmp = lst_tmp->next;	
-		}
-		lst_tmp = lst;
-	}
-	return(lst);
+    while(flag)
+    {
+        flag = 0;
+        while(cur && cur->next)
+        {
+            if(!cmp(cur->data, cur->next->data))
+            {
+                flag = 1;
+                num = cur->data;
+                cur->data = cur->next->data;
+                cur->next->data = num;
+            }
+                cur = cur->next;
+        }
+        cur = lst;
+    }
+    return(lst);
 }
 ```
 ```c
