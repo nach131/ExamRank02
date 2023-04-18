@@ -2597,7 +2597,7 @@ int	main(int n, char **str)
 	if(n == 3)
 	{
 		int a = atoi(str[1]);
-		int	b = atoi(str[2]);
+		int b = atoi(str[2]);
 		int res;
 
 		if(a > b)
@@ -2612,7 +2612,7 @@ int	main(int n, char **str)
 				break;
 			}
 			res--;
-		}	
+		}
 	}
 	printf("\n");
 	return(0);
