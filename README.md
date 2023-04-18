@@ -3926,10 +3926,12 @@ int	main(void)
 	t_list *a = calloc(1, sizeof(t_list));
 	t_list *b = calloc(1, sizeof(t_list));
 	t_list *c = calloc(1, sizeof(t_list));
+	
 	c->data = 45;
 	b->data = 73;
-	b->next = c;
 	a->data = 108;
+
+	b->next = c;
 	a->next = b;
 
 printf("\t\tfunc %d\n",ascending(b->data, c->data));
@@ -3949,6 +3951,16 @@ printf("\t\tfunc %d\n",ascending(b->data, c->data));
 	}
 }
 ```
+	131
+	12
+	42
+	402
+
+	12
+	42
+	131
+	402
+
 [index](#index)
 
 <!-- 
