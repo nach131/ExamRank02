@@ -2732,28 +2732,28 @@ int  main(int n, char **str)
 
 int	main(int n, char **str)
 {
-	if (n >= 2)
-	{
-		int i = 1;
-		while(i < n)
-		{
-			int j = 0;
-			while(str[i][j] != '\0')
-			{
-				if(str[i][j] >= 'A' && str[i][j] <= 'Z')
-					str[i][j] += 32;
-				if((str[i][j + 1] == ' ' || str[i][j + 1] == '\t' || \
-							str[i][j + 1] == '\0') && (str[i][j] >= 'a' && str[i][j] <= 'z'))
-					str[i][j] -= 32;
-				write(1, &str[i][j], 1);
-				j++;
-			}
-			write(1,  "\n", 1);
-			i++;
-		}
-	}
-	else if(n <= 1)
-		write(1,  "\n", 1);
+  if (n >= 2)
+  {
+    int i = 1;
+    while(i < n)
+    {
+      int j = 0;
+      while(str[i][j] != '\0')
+      {
+        if(str[i][j] >= 'A' && str[i][j] <= 'Z')
+          str[i][j] += 32;
+        if((str[i][j + 1] == ' ' || str[i][j + 1] == '\t' || \
+              str[i][j + 1] == '\0') && (str[i][j] >= 'a' && str[i][j] <= 'z'))
+          str[i][j] -= 32;
+        write(1, &str[i][j], 1);
+        j++;
+      }
+      write(1,  "\n", 1);
+      i++;
+    }
+  }
+  else if(n <= 1)
+    write(1,  "\n", 1);
 }
 ```
 
