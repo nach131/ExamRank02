@@ -13,7 +13,7 @@
 | [repeat_alpha](#repeat_alpha)|[ft_strcmp](#ft_strcmp)     |[hidenp](#hidenp)               |[rostring](#rostring)              |
 | [rot_13](#rot_13)         | [ft_strcspn](#ft_strcspn)     |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
 | [rotone](#rotone)         | [ft_strdup](#ft_strdup)       |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
-| [search_and_replace](#search_and_replace) | [ft_strpbrk](#ft_strpbrk) [pgcd](#pgcd)        |
+| [search_and_replace](#search_and_replace) | [ft_strpbrk](#ft_strpbrk) | [pgcd](#pgcd)      |
 | [ulstr](#ulstr)           | [ft_strrev](#ft_strrev)       |[print_hex](#print_hex)         |
 |                           |  [ft_strspn](#ft_strspn)      |[rstr_capitalizer](#rstr_capitalizer)|
 |                           |[is_power_of_2](#is_power_of_2)|[str_capitalizer](#str_capitalizer)|
