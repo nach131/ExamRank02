@@ -3826,7 +3826,8 @@ void sort_int_tab(int *tab, unsigned int size)
 			i++;
 	}
 }
-
+```
+```c
 void print_arr(int *tab, unsigned int size)
 {
 	unsigned int i = 0;
