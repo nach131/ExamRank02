@@ -10,20 +10,19 @@
 | [fizzbuzz](#fizzbuzz)     | [atoi](#atoi)                 |[ft_list_size](#ft_list_size)   |[ft_list_remove_if](#ft_list_remove_if)|
 | [ft_strcpy](#ft_strcpy)   | [camel_to_snake](#camel_to_snake) |[ft_range](#ft_range)       |[ft_split](#ft_split)              |
 | [ft_swap](#ft_swap)       | [do_op](#do_op)               |[ft_rrange](#ft_rrange)         |[rev_wstr](#rev_wstr)              |
-| [repeat_alpha](#repeat_alpha) | [ft_strcspn](#ft_strcspn) |[hidenp](#hidenp)               |[rostring](#rostring)              |
-| [rot_13](#rot_13)         | [ft_strdup](#ft_strdup)       |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
-| [rotone](#rotone)         | [ft_strpbrk](#ft_strpbrk)     |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
-| [search_and_replace](#search_and_replace) | [ft_strrev](#ft_strrev) |[pgcd](#pgcd)         |
-| [ulstr](#ulstr)           | [ft_strspn](#ft_strspn)       |[print_hex](#print_hex)         |
-|                           | [is_power_of_2](#is_power_of_2) |[rstr_capitalizer](#rstr_capitalizer)|
-|                           | [last_word](#last_word)         |[str_capitalizer](#str_capitalizer)|
-|                           | [max](#max)                     |[tab_mult](#tab_mult)         |
-|                           | [print_bits](#print_bits)       |
+| [repeat_alpha](#repeat_alpha) [ft_strcmp](#ft_strcmp)     |[hidenp](#hidenp)               |[rostring](#rostring)              |
+| [rot_13](#rot_13)         | [ft_strcspn](#ft_strcspn)     |[lcm](#lcm)                     |[sort_int_tab](#sort_int_tab)      |
+| [rotone](#rotone)         | [ft_strdup](#ft_strdup)       |[paramsum](#paramsum)           |[sort_list](#sort_list)            |
+| [search_and_replace](#search_and_replace) | [ft_strpbrk](#ft_strpbrk) [pgcd](#pgcd)        |
+| [ulstr](#ulstr)           | [ft_strrev](#ft_strrev)       |[print_hex](#print_hex)         |
+|                           |  [ft_strspn](#ft_strspn)      |[rstr_capitalizer](#rstr_capitalizer)|
+|                           |[is_power_of_2](#is_power_of_2)|[str_capitalizer](#str_capitalizer)|
+|                           | [last_word](#last_word)       |[tab_mult](#tab_mult)           |
+|                           | [max](#max)                   |
+|                           | [print_bits](#print_bits)     |
 |                           | [snake_to_camel](#snake_to_camel) |
-|                           | [strcmp](#strcmp)               |
 |                           | [swap_bits](#swap_bits)         |
 |                           | [union](#union)                 |
-
 
 # Level 0
 
@@ -1684,7 +1683,7 @@ int	main(int n, char **str)
 
 [index](#index)
 
-## strcmp
+## ft_strcmp
 <details>
 <summary>subject</summary>
 
