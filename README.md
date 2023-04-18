@@ -3372,6 +3372,32 @@ int main(void)
 </details>
 
 ```c
+void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+{
+	t_list	*lst;
+	t_list	*tmp;
+
+	lst = *begin_list;
+	while (lst && !cmp(data_ref, lst->data))
+	{
+		*begin_list = (*begin_list)->next;
+		free(lst);
+		lst = *begin_list;
+	}
+	while (lst)
+	{
+		if (lst->next && !cmp(data_ref, lst->next->data))
+		{
+			tmp = lst->next;
+			lst->next = lst->next->next;
+			free (tmp);
+		}
+		else
+			lst = lst->next;
+	}
+}
+```
+```c
 typedef struct	s_list
 {
     struct s_list   *next;
@@ -3380,26 +3406,9 @@ typedef struct	s_list
 
 int	ft_compare(int a, int b)
 {
-	return(a == b); 
+	return(a > b || a < b);
 }
 
-void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
-{
-	t_list *cur = *begin_list;
-
-	while(cur)
-	{
-		if(cmp(cur->data, data_ref) == 1) 
-		{
-			*begin_list = cur->next;
-			free(cur);
-		}
-		cur = cur->next;
-	}
-}
-```
-
-```c
 void print_lst(t_list *lst)
 {
 	while(lst)
@@ -3410,31 +3419,41 @@ void print_lst(t_list *lst)
 }
 int	main(void)
 {
-	t_list *c = calloc(1, sizeof(t_list));
-	int	c_i = 42;
-	c->data = &c_i;
-	
-	t_list *b = calloc(1, sizeof(t_list));
-	int b_i = 12;
-	b->data = &b_i;
-	b->next = c;
-	
 	t_list *a = calloc(1, sizeof(t_list));
+	t_list *b = calloc(1, sizeof(t_list));
+	t_list *c = calloc(1, sizeof(t_list));
+	t_list *d = calloc(1, sizeof(t_list));
+	
 	int	a_i = 5;
+	int b_i = 12;
+	int	c_i = 42;
+	int d_i = 5;
+
 	a->data = &a_i;
+	b->data = &b_i;
+	c->data = &c_i;
+	d->data = &a_i;
+
 	a->next = b;
+	b->next = c;
+	c->next = d;
 
 	t_list **cur = &a;
-	int	*delete_item;
-
-	delete_item = &c_i;
 	print_lst(*cur);
-	
+	int *delete_item = &a_i;
+
 	ft_list_remove_if(cur, delete_item, ft_compare);
-	printf("\n");
+	printf("-----\n");
 	print_lst(*cur);
 }
 ```
+	5
+	12
+	42
+	5
+	-----
+	12
+	42
 
 [index](#index)
 
