@@ -1972,25 +1972,23 @@ int main(int n, char **str)
 
 int main(int n, char **str)
 {
-	if (n == 2)
-	{
-		int i = 0;
-		while (*str[1] == ' ' || *str[1] == '\t')
-			++str[1];
-		while (str[1][i] != '\0')
-		{
-			if (str[1][i] == ' ' || str[1][i] == '\t')
-				i++;
-			else
-			{
-				if (i && (str[1][i - 1] == ' ' || str[1][i - 1] == '\t'))
-					write(1, " ", 1);
-				write(1, &str[1][i], 1);
-				i++;
-			}
-		}
-	}
-	write(1, "\n", 1);
+    if(n == 2)
+    {
+        int i = 0;
+        while(*str[1] == ' ' || *str[1] == '\t')
+            str[1]++;
+        while(str[1][i])
+        {
+            if(str[1][i] >= '!' && str[1][i] <= '~')
+            {
+                if(i && (str[1][i -1] == ' ' || str[1][i -1] == '\t'))
+                    write(1, " ",1);
+                write(1, &str[1][i], 1);
+            }
+            i++;
+        }
+    }
+    write(1, "\n", 1);
 }
 ```
 [index](#index)
@@ -3934,7 +3932,7 @@ int	main(void)
 	b->next = c;
 	a->next = b;
 
-printf("\t\tfunc %d\n",ascending(b->data, c->data));
+// printf("\t\tfunc %d\n",ascending(b->data, c->data));
 
 	t_list *cur = a;
 	while(cur)
