@@ -3901,6 +3901,14 @@ t_list  *sort_list(t_list* lst, int (*cmp)(int, int))
 }
 ```
 ```c
+#include <stdlib.h>
+#include <stdio.h>
+
+int ascending(int a, int b)
+{
+	return (a <= b);
+}
+
 int	main(void)
 {
 	t_list *a = calloc(1, sizeof(t_list));
@@ -3913,8 +3921,6 @@ int	main(void)
 
 	b->next = c;
 	a->next = b;
-
-// printf("\t\tfunc %d\n",ascending(b->data, c->data));
 
 	t_list *cur = a;
 	while(cur)
