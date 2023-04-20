@@ -3637,6 +3637,7 @@ char    **ft_split(char *str)
     return(res);
 }
 ```
+
 ```c
 void print_all(char **res)
 {
