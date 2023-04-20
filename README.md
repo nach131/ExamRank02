@@ -3478,50 +3478,45 @@ int main(void)
 </details>
 
 ```c
-#include <unistd.h>
-
-int ft_len(char *str)
+int count_words(char *str)
 {
-  int i = 0;
+    int num_words = 0;
 
-  while (str[i] != '\0')
-   i++;
-  return (i);
+    while(*str == ' ' || *str == '\t' || *str == '\n')
+        str++;
+    while(*str != '\0')
+    {
+        num_words++;
+        while(*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
+            str++;
+        while(*str == ' ' || *str == '\t' || *str == '\n')
+            str++;
+    }
+    return(num_words);
+
 }
 
-int main(int n, char **str)
+int word_len(char *str)
 {
-  if (n == 2)
-  {
-   int i = 0;
-   int len = ft_len(str[1]) - 1;
-   int end = len;
-   while (len || end)
-   {
-     if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
-     {
-      if (!len)
-        i = 0;
-      else
-        i = len + 1;
-      while (i <= end)
-      {
-        write(1, &str[1][i], 1);
+    int i = 0;
+    while(str[i] !='\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
         i++;
-      }
-      if (!len)
-        break;
-      if (i >= end)
-      {
-        write(1, &str[1][len], 1);
-        end = len - 1;
-      }
-     }
-     len--;
-   }
-  }
-  write(1, "\n", 1);
-  return (0);
+    return(i);
+}
+
+char *keep_word(char *str)
+{
+    int i = 0;
+    int len = word_len(str);
+    char *word = malloc((len + 1) * sizeof(char));
+
+    word[len] = '\0';
+    while(i < len)
+    {
+        word[i] = str[i];
+        i++;
+    }
+    return(word);
 }
 
 void fill_words(char **res, char *str)
@@ -3552,6 +3547,7 @@ char    **ft_split(char *str)
 
     return(res);
 }
+
 ```
 
 ```c
