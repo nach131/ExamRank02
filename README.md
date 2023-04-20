@@ -3480,106 +3480,45 @@ int main(void)
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-
-char *g_str;
-int g_word;
-
 int count_words(char *str)
 {
-	int i = 0;
-	int words = 0;
+    int num_words = 0;
 
-	if (str[i] == '\0')
-		return (0);
-	while (str[i] != '\0')
-	{
-		if (str[i] == ' ')
-			words++;
-		i++;
-	}
-	if (str[i - 1] == ' ')
-		words -= 1;
-	if (str[0] == ' ')
-		words -= 1;
-	words += 1;
-	return (words);
-}
-void pasar(int len, char *tmp, char **res)
-{
-	int i = 0;
-	res[g_word] = calloc(len, sizeof(char));
-	while (i < len)
-	{
-		res[g_word][i] = tmp[i];
-		i++;
-	}
-	g_word++;
+    while(*str == ' ' || *str == '\t' || *str == '\n')
+        str++;
+    while(*str != '\0')
+    {
+        num_words++;
+        while(*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
+            str++;
+        while(*str == ' ' || *str == '\t' || *str == '\n')
+            str++;
+    }
+    return(num_words);
 
 }
 
-void solo_word(int words, char **res)
+int word_len(char *str)
 {
-	int len = 0;
-	char *tmp;
-	if (words == g_word)
-		return;
-	if (*g_str == ' ')
-		++g_str;
-	tmp = g_str;
-	while (*g_str)
-	{
-		if (*g_str != ' ')
-		{
-			++g_str;
-			len++;
-		}
-		else
-		{
-			pasar(len, tmp, res);
-			solo_word(words, res);
-		}
-	}
-	pasar(len, tmp, res);
-}
-char **ft_split(char *str)
-{
-	g_str = str;
-	char **res;
-	int words = count_words(str);
-
-	res = calloc((words + 1), sizeof(char *));
-	if (!res)
-		return (NULL);
-
-	solo_word(words, res);
-	return (res);
-}
-```
-```c
-void print_dp(char **str)
-{
-	int i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			printf("%s", str[i]);
-			i++;
-		}
-	}
-	else
-		printf("nada\n");
+    int i = 0;
+    while(str[i] !='\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+        i++;
+    return(i);
 }
 
-int main(void)
+char *keep_word(char *str)
 {
+    int i = 0;
+    int len = word_len(str);
+    char *word = malloc((len + 1) * sizeof(char));
 
-	char *str = "42 Barcelona ";
-	char **esto;
-
-	esto = ft_split(str);
-	print_dp(esto);
-	return (0);
+    word[len] = '\0';
+    while(i < len)
+    {
+        word[i] = str[i];
+        i++;
+    }
+    return(word);
 }
 ```
 
@@ -3667,6 +3606,59 @@ int main(int n, char **str)
   }
   write(1, "\n", 1);
   return (0);
+}
+
+void fill_words(char **res, char *str)
+{
+    int index = 0;
+
+    while(*str == ' ' || *str == '\t' || *str == '\n')
+        str++;
+    while(*str != '\0')
+    {
+        res[index] = keep_word(str);
+        index++;
+        while(*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
+        str++;
+        while(*str == ' ' || *str == '\t' || *str == '\n')
+            str++;
+    }
+}
+
+char    **ft_split(char *str)
+{
+    int words = count_words(str);
+//  char **res = malloc(words * sizeof(char*));
+    char **res = malloc((words + 1) * sizeof(char*));
+    res[words] = 0;
+    fill_words(res, str);
+
+
+    return(res);
+}
+```
+```c
+void print_all(char **res)
+{
+    int i = 0;
+    if(res)
+    {
+        while(res[i])
+        {
+            printf("%s\n",res[i]);
+            i++;
+        }
+    }
+}
+
+int main(void)
+{
+    char *str = "42 Barcelona es el campus de programación más innovador y gratuito que te abre las puertas al mercado laboral. Con una metodología revolucionaria y una duración media de tres años, está abierto las 24 horas del día, 7 días a la semana para que puedas aprender a tu ritmo.";
+    char *str_ = "42 Barcelona uno";
+    char **res;
+
+    res = ft_split(str);
+    print_all(res);
 }
 ```
 
