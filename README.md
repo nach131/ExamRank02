@@ -3478,90 +3478,6 @@ int main(void)
 </details>
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-int count_words(char *str)
-{
-    int num_words = 0;
-
-    while(*str == ' ' || *str == '\t' || *str == '\n')
-        str++;
-    while(*str != '\0')
-    {
-        num_words++;
-        while(*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
-            str++;
-        while(*str == ' ' || *str == '\t' || *str == '\n')
-            str++;
-    }
-    return(num_words);
-
-}
-
-int word_len(char *str)
-{
-    int i = 0;
-    while(str[i] !='\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-        i++;
-    return(i);
-}
-
-char *keep_word(char *str)
-{
-    int i = 0;
-    int len = word_len(str);
-    char *word = malloc((len + 1) * sizeof(char));
-
-    word[len] = '\0';
-    while(i < len)
-    {
-        word[i] = str[i];
-        i++;
-    }
-    return(word);
-}
-```
-
-[index](#index)
-
-## rev_wstr
-
-<details>
-<summary>subject</summary>
-
-	Assignment name  : rev_wstr
-	Expected files   : rev_wstr.c
-	Allowed functions: write, malloc, free
-	--------------------------------------------------------------------------------
-
-	Write a program that takes a string as a parameter, and prints its words in 
-	reverse order.
-
-	A "word" is a part of the string bounded by spaces and/or tabs, or the 
-	begin/end of the string.
-
-	If the number of parameters is different from 1, the program will display 
-	'\n'.
-
-	In the parameters that are going to be tested, there won't be any "additional" 
-	spaces (meaning that there won't be additionnal spaces at the beginning or at 
-	the end of the string, and words will always be separated by exactly one space).
-
-	Examples:
-
-	$> ./rev_wstr "You hate people! But I love gatherings. Isn't it ironic?" | cat -e
-	ironic? it Isn't gatherings. love I But people! hate You$
-	$>./rev_wstr "abcdefghijklm"
-	abcdefghijklm
-	$> ./rev_wstr "Wingardium Leviosa" | cat -e
-	Leviosa Wingardium$
-	$> ./rev_wstr | cat -e
-	$
-	$>
-
-</details>
-
-```c
 #include <unistd.h>
 
 int ft_len(char *str)
@@ -3661,6 +3577,94 @@ int main(void)
     res = ft_split(str);
     print_all(res);
 }
+```
+
+[index](#index)
+
+## rev_wstr
+
+<details>
+<summary>subject</summary>
+
+	Assignment name  : rev_wstr
+	Expected files   : rev_wstr.c
+	Allowed functions: write, malloc, free
+	--------------------------------------------------------------------------------
+
+	Write a program that takes a string as a parameter, and prints its words in 
+	reverse order.
+
+	A "word" is a part of the string bounded by spaces and/or tabs, or the 
+	begin/end of the string.
+
+	If the number of parameters is different from 1, the program will display 
+	'\n'.
+
+	In the parameters that are going to be tested, there won't be any "additional" 
+	spaces (meaning that there won't be additionnal spaces at the beginning or at 
+	the end of the string, and words will always be separated by exactly one space).
+
+	Examples:
+
+	$> ./rev_wstr "You hate people! But I love gatherings. Isn't it ironic?" | cat -e
+	ironic? it Isn't gatherings. love I But people! hate You$
+	$>./rev_wstr "abcdefghijklm"
+	abcdefghijklm
+	$> ./rev_wstr "Wingardium Leviosa" | cat -e
+	Leviosa Wingardium$
+	$> ./rev_wstr | cat -e
+	$
+	$>
+
+</details>
+
+```c
+#include <unistd.h>
+
+int ft_len(char *str)
+{
+  int i = 0;
+
+  while (str[i] != '\0')
+   i++;
+  return (i);
+}
+
+int main(int n, char **str)
+{
+  if (n == 2)
+  {
+   int i = 0;
+   int len = ft_len(str[1]) - 1;
+   int end = len;
+   while (len || end)
+   {
+     if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
+     {
+      if (!len)
+        i = 0;
+      else
+        i = len + 1;
+      while (i <= end)
+      {
+        write(1, &str[1][i], 1);
+        i++;
+      }
+      if (!len)
+        break;
+      if (i >= end)
+      {
+        write(1, &str[1][len], 1);
+        end = len - 1;
+      }
+     }
+     len--;
+   }
+  }
+  write(1, "\n", 1);
+  return (0);
+}
+
 ```
 
 [index](#index)
