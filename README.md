@@ -3617,50 +3617,39 @@ int main(void)
 ```c
 #include <unistd.h>
 
-int ft_len(char *str)
+void    ft_reverse(char *s)
 {
-  int i = 0;
+    int len = 0;
+    int j;
+    int first_word = 1;
 
-  while (str[i] != '\0')
-   i++;
-  return (i);
+    while(s[len])
+        len++;
+    while(len >= 0)
+    {
+        while(len >= 0 && (s[len] == '\0' || s[len] == ' ' || s[len] == '\t'))
+            len--;
+        j = len;
+        while(j >= 0 && s[j] != ' ' && s[j] != '\t')
+        j--;
+        if(first_word == 0)
+            write(1, " ", 1);
+        write(1, s + j + 1, len - j);
+        first_word = 0;
+        len = j;
+    }
 }
+
 
 int main(int n, char **str)
 {
-  if (n == 2)
-  {
-   int i = 0;
-   int len = ft_len(str[1]) - 1;
-   int end = len;
-   while (len || end)
-   {
-     if (str[1][len] == ' ' || str[1][len] == '\t' || !len)
-     {
-      if (!len)
-        i = 0;
-      else
-        i = len + 1;
-      while (i <= end)
-      {
-        write(1, &str[1][i], 1);
-        i++;
-      }
-      if (!len)
-        break;
-      if (i >= end)
-      {
-        write(1, &str[1][len], 1);
-        end = len - 1;
-      }
-     }
-     len--;
-   }
-  }
-  write(1, "\n", 1);
-  return (0);
-}
+    if (n == 2)
+    {
+        ft_reverse(str[1]);
+    }
+    write(1, "\n", 1);
 
+}
 ```
 
 [index](#index)
