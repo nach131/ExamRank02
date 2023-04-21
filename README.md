@@ -3290,7 +3290,7 @@ void ft_pot(void *n)
 	t_list *cur = begin_list;
 	while(cur)
 	{
-		f(cur->data);
+		(*f)(cur->data);
 		cur = cur->next;
 	}
 }
