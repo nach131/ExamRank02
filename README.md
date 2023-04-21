@@ -3277,9 +3277,7 @@ int main(int n, char **str)
 </details>
 
 ```c
-#include <stdlib.h>
 #include "ft_list.h"
-#include <stdio.h>
 
 void ft_pot(void *n)
 {
