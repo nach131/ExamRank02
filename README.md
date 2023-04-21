@@ -3277,63 +3277,64 @@ int main(int n, char **str)
 </details>
 
 ```c
+#ifndef FT_LIST_H
+# define FT_LIST_H
+
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *data;
+}                 t_list;
+
+#endif
+```
+
+```c
 #include "ft_list.h"
 
-void ft_pot(void *n)
+void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-	int *tp = (int *)n;
-	*tp = *tp * 2;
-}
+    t_list *cur = begin_list;
 
- void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
-{
-	t_list *cur = begin_list;
-	while(cur)
-	{
-		(*f)(cur->data);
-		cur = cur->next;
-	}
+    while(cur)
+    {
+        (*f)(cur->data);
+        cur = cur->next;
+    }
 }
 ```
 ```c
-void print_lst(t_list *lst)
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_lst(void *s)
 {
-	int i = 0;
-	while (lst != 0)
-	{
-		printf("\e[5;32m%d\n\e[0m", *(int *)(lst->data));
-		lst = lst->next;
-		i++;
-	}
+        printf("%s\n", s);
 }
 
 int main(void)
 {
-	t_list *c = calloc(1, sizeof(t_list));
-	int n_c = 12;
-	c->data = &n_c;
 
-	t_list *b = calloc(1, sizeof(t_list));
-	b->next = c;
-	int n_b = 6;
-	b->data = &n_b;
+    t_list *a = calloc(1, sizeof(t_list));
+    t_list *b = calloc(1, sizeof(t_list));
+    t_list *c = calloc(1, sizeof(t_list));
 
-	t_list *a = calloc(1, sizeof(t_list));
-	a->next = b;
-	int n_a = 42;
-	a->data = &n_a;
+    a->data = "42 Barcelona";
+    b->data = "42 Madrid";
+    c->data = "42 Malaga";
 
-	t_list *cur = a;
+    a->next = b;
+    b->next = c;
 
-	print_lst(cur);
-//	ft_pot(a->data);
-	ft_list_foreach(cur, ft_pot);
-	printf("-----\n");
-	print_lst(cur);
+    ft_list_foreach(a, print_lst);
 
-	return (0);
+    return(0);
 }
 ```
+
+	42 Barcelona
+	42 Madrid
+	42 Malaga
 
 [index](#index)
 
