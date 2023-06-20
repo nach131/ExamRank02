@@ -1232,12 +1232,9 @@ char	*ft_strdup(char *src)
 	res = malloc(i + 1);
 	if(!res)
 		return(NULL);
-	i = 0;
-	while(src[i])
-	{
+	i = -1;
+	while(src[++i])
 		res[i] = src[i];
-		i++;
-	}
 	res[i] = '\0';
 
 	return(res);
